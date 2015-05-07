@@ -111,5 +111,9 @@ class Cetak extends CI_Controller {
     function perubahan2(){
         $this->load->view('harusnya_perubahan');
     }
+    
+    function perubahan3(){
+        $this->load->view('harusnya_perubahan3');
+    }
 
 }

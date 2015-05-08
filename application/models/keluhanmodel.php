@@ -13,6 +13,10 @@
  */
 class keluhanmodel extends CI_Model {
     
+//    function getkeluhan(){
+//        return $this->db->get('Keluhan');
+//    }
+    
     function getkeluhan(){
         return $this->db->get('Keluhan');
     }
@@ -20,4 +24,6 @@ class keluhanmodel extends CI_Model {
     function insert($data){
         $this->db->insert('Keluhan',$data);
     }
+    
+    
 }

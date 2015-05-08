@@ -68,28 +68,60 @@
                     </div>		
                 </div>
             </div>
+                                    
             <div class="menu_box">
-                <h3>KELUHAN DAN TANGGAPAN</h3>
+                <h3>Recent Update</h3>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-body">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#home" data-toggle="tab">Keluahan</a></li>
-                                <li><a href="#profile" data-toggle="tab">Tanggapan</a></li>
-                                <li><a href="#messages" data-toggle="tab">Messages</a></li>
-                                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                                <li><a href="#tanggapan" data-toggle="tab">Tanggapan</a></li>
+                                <li><a href="#peta" data-toggle="tab">Peta</a></li>
+                              
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div class="tab-pane active" id="home">
                                     {foreach $data.keluhan_terkini->result() as $keluhan}
-                                        <h1>{$keluhan->UserID}</h1>
-                                        <h3>{$keluhan->IsiKeluhan}</h3>
+                                        <div>
+                                            <h2>{$keluhan->UserID}</h2>
+                                            {$keluhan->Tanggal}
+                                        </div>
+                                        <div>
+                                            <h4>{$keluhan->IsiKeluhan}</h4>
+                                        </div>
+                                        <div>
+                                            <h6>   
+                                            {$keluhan->KodeTingkatan}
+                                            {$keluhan->Tipe}
+                                            {$keluhan->KategoriID}
+                                            {$keluhan->StatusKeluhan}
+                                        </h6>
+                                        </div>
+                                        <br>
                                     {/foreach}
                                 </div>
-                                <div class="tab-pane" id="profile">...
-                                    <input type="text" name="name" required>
+                                <div class="tab-pane" id="tanggapan">
+                                    {foreach $data.keluhan_terkini->result() as $keluhan}
+                                        <div>
+                                            <h2>{$keluhan->UserID}</h2>
+                                            {$keluhan->Tanggal}
+                                        </div>
+                                        <div>
+                                            <h4>{$keluhan->IsiKeluhan}</h4>
+                                        </div>
+                                        <div>
+                                            <h6>   
+                                            {$keluhan->KodeTingkatan}
+                                            {$keluhan->Tipe}
+                                            {$keluhan->KategoriID}
+                                            {$keluhan->StatusKeluhan}
+                                        </h6>
+                                        </div>
+                                        <br>
+                                    {/foreach}
                                 </div>
                                 <div class="tab-pane" id="messages">...
                                     <input type="text" name="address" required>
@@ -108,7 +140,7 @@
                     <a href=""><img src="{base_url()}assets/images/izul.png" alt="">	</a>		         
                     <div class="profile_picture_name">
                         <h2>Aizul Fadin </h2>
-                        <p>Jangan menyerah atas impianmu. Impian memberimu tujuan hidup. Ingatlah, bahwa sukses bukan kunci utama kebahagiaan. Semangat! </p>
+                        <p>Jangan menyerah atas impianmu. Impian memberimu tujuan hidup</p>
                     </div>
                     <span><a href="#"> <img src="{base_url()}assets/images/follow_user.png" alt=""> </a></span>
                 </div>
@@ -121,100 +153,7 @@
                     </ul>
                 </div>
             </div>
-            <!--d<iv class="column_right_grid">
-                <div class="newsletter">
-                    <h3>Join the newsletter</h3>
-                    <form>
-                        <span>
-                            <i><img src="{base_url()}assets/images/mail.png" alt="" /></i>
-                            <input type="text" value="Enter your email" onfocus="this.value = '';" onblur="if (this.value == '') {
-                                        this.value = 'Enter your email';
-                                    }">
-                        </span>			 	    
-                        <input type="submit" class="my_button" value="Subscribe">
-                    </form>
-                </div>
-            </div>
-            <div class="column_right_grid downloading_uploading">
-                <ul>
-                    <li>                              
-                        <div class="progress">
-                            <div class="progress-bar" style="width:81%"> </div>
-                        </div>
-                        <div class="clearfix">
-                            <p class="downloading"> <i><img src="{base_url()}assets/images/download.png" alt="" /></i> Downloading...</p>
-                            <p class="percentage">81<em>%</em></p>
-                            <div class="clear"></div>
-                        </div>
-                    </li>
-                    <li>                              
-                        <div class="progress">
-                            <div class="progress-bar uploading" style="width:43%"> </div>
-                        </div>
-                        <div class="clearfix">
-                            <p class="downloading"><i><img src="{base_url()}assets/images/upload.png" alt="" /></i> Uploading...</p>
-                            <p class="percentage">43<em>%</em></p>
-                            <div class="clear"></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="column_right_grid date_events">
-                <h3><a href="#" id="slide_prev"><img src="{base_url()}assets/images/arrow-left.png" alt="" /></a> Wednesday <a href="#" id="slide_next"><img src="images/arrow-right.png" alt="" /></a></h3>
-                <ul id="slide" class="event_dates">					            
-                    <li>26</li>
-                    <li>25</li>
-                    <li>24</li>
-                    <li>23</li>
-                    <li>22</li>
-                    <li>21</li>
-                    <li>20</li>
-                    <li>19</li>
-                    <li>18</li>
-                    <li>17</li>
-                    <li>16</li>
-                    <li>15</li>
-                    <li>14</li>
-                    <li>13</li>
-                    <li>12</li>
-                    <li>11</li>
-                    <li>10</li>
-                    <li>9</li>
-                    <li>8</li>
-                    <li>7</li>
-                    <li>6</li>
-                    <li>5</li>
-                    <li>4</li>
-                    <li>3</li>
-                    <li>2</li>
-                    <li>1</li>
-                    <li>31</li>
-                    <li>30</li>
-                    <li>29</li>
-                    <li>28</li>
-                    <li>27</li>
-                </ul>
-                <div class="button"><a href="#">Add Event</a></div>											 				
-                <script type="text/javascript">
-                    $(function () {
-                        $('#slide').ulslide({
-                            effect: {
-                                type: 'carousel', // slide or fade
-                                axis: 'x', // x, y
-                                showCount: 1
-                            },
-                            nextButton: '#slide_next',
-                            prevButton: '#slide_prev',
-                            duration: 800,
-                            /*autoslide: 2000,*/
-                            easing: 'easeOutBounce'
-                        });
-                    });
-                </script>
-            </div>
-            <div class="column_right_grid calender">
-                <div class="cal1"> </div>
-            </div>-->
+            
         </div>
         <div class="clear"></div>
     </div>

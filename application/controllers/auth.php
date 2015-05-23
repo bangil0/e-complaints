@@ -43,7 +43,7 @@ class Auth extends CI_Controller {
         $data['title'] = "Masuk Sistem Informasi Layanan P2F - LIPI ";
 
         if ($this->ion_auth->logged_in()) {
-            redirect('/', 'refresh');
+            redirect('auth/logout', 'refresh');
         }
 
         $this->form_validation->set_rules('username', 'Username', 'required');

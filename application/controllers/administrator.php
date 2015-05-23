@@ -26,73 +26,39 @@ class Administrator extends CI_Controller {
         //$this->load->library('ion_auth');
         //$this->load->library('session');
         //$this->load->library('smartyci');
+        $this->load->library('ion_auth');
+        $this->load->library('form_validation');
+        $this->load->library('session');
+        $this->load->library('upload');
         // load table
-        $this->load->model('tbl_halaman');
-        $this->load->model('tbl_berita');
-        $this->load->model('tbl_kategori');
-        $this->load->model('tbl_pengujian');
-        $this->load->model('tbl_administrator');
-        $this->load->model('tbl_pembimbing');
-        $this->load->model('tbl_kuesioner');
-        $this->load->model('pemohon_m');
-
+        $this->load->model('comboboxmodel');
+        $this->load->model('pemerintahmodel');
+        $this->load->model('keluhanmodel');
+        $this->load->model('usermodel');
+        $this->load->model('ion_auth_model');
+        $this->load->model('masyarakatmodel');
+        $this->load->model('kategorimodel');
         $this->load->helper(array('url', 'form'));
     }
 
     function index() {
         if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
         } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Beranda',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => '0',
-                    'username' => 'Ihsan Arif Rahman'),
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-            $coba['card'] = 'ihsan';
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/index.tpl');
+            $status = true;
+            $this->smartyci->assign('status', $status);
         }
-    }
-
-    // Menu Utama
-    function halaman() {
 
         if (!$this->ion_auth->logged_in()) {
             //redirect them to the login page
             $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
+            redirect('auth/logout', 'refresh');
         } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
             //redirect them to the home page because they must be an administrator to view this
             $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
+            redirect('auth/logout');
         } else {
             // pemanggilan di header username
             $user = $this->ion_auth->user()->row();
@@ -106,273 +72,34 @@ class Administrator extends CI_Controller {
             $this->smartyci->assign('groups', $groups);
 
             $data = array(
-                'meta' => array(
-                    'title' => 'Halaman',
-                    'menu' => array(
-                        'menu_utama' => 1,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'halaman',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_halaman' => $this->tbl_halaman->viewall(),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-            $coba['card'] = 'ihsan';
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_utama/halaman.tpl');
-        }
-    }
-
-    function tatacara() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Tata Cara',
-                    'menu' => array(
-                        'menu_utama' => 1,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'tatacara',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_halaman' => $this->tbl_halaman->viewall(),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-            $coba['card'] = 'ihsan';
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_utama/tatacara.tpl');
-        }
-    }
-
-    function kontakkami() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Kontak Kami',
-                    'menu' => array(
-                        'menu_utama' => 1,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'kontakkami',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_halaman' => $this->tbl_halaman->viewall(),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-            $coba['card'] = 'ihsan';
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_utama/kontakkami.tpl');
-        }
-    }
-
-    // menu berita
-    function berita() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Berita',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 1,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'berita',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_berita' => $this->tbl_berita->viewall(),
-                'data_kategori' => $this->tbl_kategori->viewall(),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message'),
-                'form' => array(
-                    'judul' => array(
-                        'name' => 'judul',
-                        'class' => 'form-control',
-                        'placeholder' => 'Masukkan Judul',
-                        'type' => 'text',
-                        'id' => 'judul'
-                    ),
-                    'tanggal' => array(
-                        'name' => 'tanggal',
-                        'class' => 'form-control',
-                        'placeholder' => 'Masukkan Tanggal',
-                        'type' => 'text',
-                        'id' => 'tanggal'
-                    ),
-                    'penulis' => array(
-                        'name' => 'penulis',
-                        'class' => 'form-control',
-                        'placeholder' => 'Masukkan penulis',
-                        'type' => 'text',
-                        'id' => 'penulis',
-                    ),
-                    'isi' => array(
-                        'name' => 'isi',
-                        'class' => 'form-control',
-                        'placeholder' => 'Masukkan Isi',
-                        'type' => 'text',
-                        'isi' => 'isi'
-                    ),
-                ),
-            );
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_berita/berita.tpl');
-        }
-    }
-
-    function insert_berita() {
-        $tables = $this->config->item('tables', 'ion_auth');
-        //validate form input
-        $this->form_validation->set_rules('penulis', 'Penulis', 'required');
-        $this->form_validation->set_rules('tanggal', 'tanggal', 'required');
-        $this->form_validation->set_rules('judul', 'Judul Isi', 'required');
-        $this->form_validation->set_rules('kategori', 'Kategori', 'required');
-
-        if ($this->form_validation->run() == true) {
-            $data = array(
-                'user_id' => $this->input->post('penulis'),
-                'tanggal' => $this->input->post('tanggal'),
-                'judul' => $this->input->post('judul'),
-                'id_kategori' => $this->input->post('kategori'),
-                'isi' => $this->input->post('isi')
-            );
-
-            $this->tbl_berita->insert($data);
-        } else {
-            $data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('layout/registrasi.tpl');
-        }
-    }
-
-    function kategori_berita() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Kategori berita',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 1,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'kategoriberita',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_kategori' => $this->tbl_kategori->viewall(),
-                'no' => 1,
+                'keluhan' => $this->keluhanmodel->getJumlahKeluhan(),
+                'users' => $this->usermodel->getJumlahUser(),
                 'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
             );
 
             $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_berita/kategori_berita.tpl');
+            $this->smartyci->display('administrator/beranda.tpl');
         }
     }
 
-    function pengujian() {
+    function pemerintahkota($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
         if (!$this->ion_auth->logged_in()) {
             //redirect them to the login page
             $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
+            redirect('auth/logout', 'refresh');
         } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
             //redirect them to the home page because they must be an administrator to view this
             $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
+            redirect('auth/logout');
         } else {
             // pemanggilan di header username
             $user = $this->ion_auth->user()->row();
@@ -382,42 +109,228 @@ class Administrator extends CI_Controller {
                 $groups[$user_group->id] = $user_group->name;
             }
 
+            // saat edit ambil data sesuai dengan set value
+            $data['PemerintahKota'] = $this->pemerintahmodel->getUserPemerintah(1);
+
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            //$this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
+            $this->form_validation->set_rules('kode_pemerintah', 'Kode Pemerintahan', 'required|xss_clean');
+            $this->form_validation->set_rules('logo', 'Logo', 'callback_image_upload');
+            $this->form_validation->set_rules('email', 'Alamat Email', 'required|valid_email');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+            $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
+
             $this->smartyci->assign('user', $user);
             $this->smartyci->assign('groups', $groups);
 
-            $data = array(
-                'meta' => array(
-                    'title' => 'Pengujian',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'pengujian',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_pengujian' => $this->tbl_pengujian->viewall(),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
 
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/pengujian.tpl');
+                        $username = $this->input->post('email');
+                        $password = $this->input->post('password');
+
+                        $group = array('3'); // Sets user to admin. No need for array('1', '2') as user is always set to member by default
+
+                        $additional_data = array(
+                            'photo' => $this->input->post('logo'),
+                                //'pemohon_id' => $this->db->insert_id(),
+                        );
+
+                        if ($this->ion_auth->register($username, $password, $username, $additional_data, $group) == true) {
+                            $data = array(
+                                'Nama' => $this->input->post('nama'),
+                                'Email' => $this->input->post('email'),
+                                'Logo' => $this->upload->file_name,
+                                //'password' => $this->input->post('password'),
+                                'KodePemerintah' => $this->input->post('kode_pemerintah'),
+                                'Tipe' => 'Kota',
+                                'UserID' => $this->pemerintahmodel->getLastID()
+                            );
+                            $this->pemerintahmodel->insertPemerintah($data);
+
+                            // notifikasi sudah ada
+                            $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        }
+                        //$this->pemerintahmodel->insert($data);
+                        redirect('administrator/pemerintahkota', 'refresh');
+                        //echo "success";
+                        //break;
+                    } else {
+                        $data['nama'] = array(
+                            'name' => 'nama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Nama Identitas',
+                            'value' => $this->form_validation->set_value('nama')
+                        );
+
+                        $data['email'] = array(
+                            'name' => 'email',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik email',
+                            'value' => $this->form_validation->set_value('email')
+                        );
+                        $data['logo'] = array(
+                            'name' => 'logo',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Logo',
+                            'type' => 'file',
+                            'value' => $this->form_validation->set_value('logo')
+                        );
+                        $data['password'] = array(
+                            'name' => 'password',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Passoword',
+                            'type' => 'password',
+                            'value' => $this->form_validation->set_value('password')
+                        );
+                        $data['kode_pemerintah'] = array(
+                            'option' => $this->comboboxmodel->getKota_dropdown(),
+                            'name' => 'kode_pemerintah',
+                            'diseleksi' => $this->form_validation->set_value('id_kategori')
+                        );
+                        $data['password_confirm'] = array(
+                            'name' => 'password_confirm',
+                            'class' => 'form-control',
+                            'type' => 'password',
+                            'placeholder' => 'Konfirmasi Password',
+                            'value' => $this->form_validation->set_value('password_confirm'),
+                        );
+
+                        $this->smartyci->assign('data', $data);
+                        $this->smartyci->display('administrator/user_pemerintah/insert_pemerintahkota.tpl');
+                        break;
+                    }
+                case 'edit':
+                    $this->form_validation->set_rules('password_lama', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
+
+                    if ($this->form_validation->run() == true) {
+                        $password = $this->input->post('password_lama');
+                        $UserID = $this->input->post('UserID');
+                        $id = $this->input->post('ID');
+
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                            'Email' => $this->input->post('email'),
+                            'Logo' => $this->upload->file_name,
+                            //'password' => $this->input->post('password'),
+                            'KodePemerintah' => $this->input->post('kode_pemerintah'),
+                            'Tipe' => 'Kota',
+                            'UserID' => $this->input->post('UserID'),
+                        );
+
+                        $ionauth = array(
+                            'email' => $this->input->post('email'),
+                            'password' => $this->input->post('password'),
+                        );
+
+                        //if ($this->ion_auth->hash_password_db($UserID, $password) != true) {
+                        //$data['message'] = $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+                        //    redirect('administrator/pemerintahkota/edit/' . $id . '');
+                        //}
+                        // update 
+                        $this->pemerintahmodel->updateUserPemerintah($id, $data);
+                        $this->ion_auth_model->update($UserID, $ionauth);
+
+                        redirect('administrator/pemerintahkota', 'refresh');
+                        break;
+                    } else {
+                        if (empty($value)) {
+                            redirect('administrator/pemerintahkota', 'refresh');
+                        }
+                        // ambil data user pemerintah kota sesuai dengan id
+                        $query = $this->pemerintahmodel->getUserPemerintahEdit($value);
+                        $kota = $query->row();
+                        // ambil dengan method 
+
+                        $data['nama'] = array(
+                            'name' => 'nama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Nama Identitas',
+                            'value' => ($kota->Nama == "" ? $this->form_validation->set_value('nama') : $kota->Nama)
+                        );
+
+                        $data['email'] = array(
+                            'name' => 'email',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik email',
+                            'value' => ($kota->Email == "" ? $this->form_validation->set_value('email') : $kota->Email)
+                        );
+                        $data['logo'] = array(
+                            'name' => 'logo',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Logo',
+                            'type' => 'file',
+                            'value' => ($kota->Logo == "" ? $this->form_validation->set_value('logo') : $kota->Logo)
+                        );
+                        $data['password_lama'] = array(
+                            'name' => 'password_lama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Password Lama',
+                            'type' => 'text',
+                            'value' => $this->form_validation->set_value('password_lama')
+                        );
+                        $data['password'] = array(
+                            'name' => 'password',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Passoword',
+                            'type' => 'password',
+                            'value' => $this->form_validation->set_value('password')
+                        );
+                        $data['kode_pemerintah'] = array(
+                            'option' => $this->comboboxmodel->getKota_dropdown(),
+                            'name' => 'kode_pemerintah',
+                            'diseleksi' => ($kota->KodePemerintah == "" ? $this->form_validation->set_value('kode_pemerintah') : $kota->KodePemerintah)
+                        );
+                        $data['password_confirm'] = array(
+                            'name' => 'password_confirm',
+                            'class' => 'form-control',
+                            'type' => 'password',
+                            'placeholder' => 'Konfirmasi Password',
+                            'value' => $this->form_validation->set_value('password_confirm'),
+                        );
+
+                        // ngambil id untuk ke alamat form_open
+                        $data['id'] = $kota->ID;
+                        $data['UserID'] = $kota->UserID;
+
+                        $this->smartyci->assign('data', $data);
+                        $this->smartyci->display('administrator/user_pemerintah/edit_pemerintahkota.tpl');
+                        break;
+                    }
+                case 'delete':
+                    $UserID = $this->input->get('user');
+                    //echo $UserID;
+                    //echo $value;
+                    $this->ion_auth->delete_user($UserID);
+                    $this->pemerintahmodel->deleteUserPemerintah($value);
+                    redirect('administrator/pemerintahkota', 'refresh');
+                    break;
+                default :
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/user_pemerintah/pemerintah_kota.tpl');
+            }
         }
     }
 
-    // data pegawai
-    function data_administrator() {
+    function pemerintahprovinsi($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
         if (!$this->ion_auth->logged_in()) {
             //redirect them to the login page
             $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
+            redirect('auth/logout', 'refresh');
         } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
             //redirect them to the home page because they must be an administrator to view this
             $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
+            redirect('auth/logout');
         } else {
             // pemanggilan di header username
             $user = $this->ion_auth->user()->row();
@@ -427,41 +340,228 @@ class Administrator extends CI_Controller {
                 $groups[$user_group->id] = $user_group->name;
             }
 
+            // saat edit ambil data sesuai dengan set value
+            $data['PemerintahProvinsi'] = $this->pemerintahmodel->getUserPemerintah(2);
+
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            //$this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
+            $this->form_validation->set_rules('kode_pemerintah', 'Kode Pemerintahan', 'required|xss_clean');
+            $this->form_validation->set_rules('logo', 'Logo', 'callback_image_upload');
+            $this->form_validation->set_rules('email', 'Alamat Email', 'required|valid_email');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+            $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
+
             $this->smartyci->assign('user', $user);
             $this->smartyci->assign('groups', $groups);
 
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Administrator',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 1,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'administrator',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_administrator' => $this->tbl_administrator->viewall(),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
 
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_pegawai/data_administrator.tpl');
+                        $username = $this->input->post('email');
+                        $password = $this->input->post('password');
+
+                        $group = array('3'); // Sets user to admin. No need for array('1', '2') as user is always set to member by default
+
+                        $additional_data = array(
+                            'photo' => $this->input->post('logo'),
+                                //'pemohon_id' => $this->db->insert_id(),
+                        );
+
+                        if ($this->ion_auth->register($username, $password, $username, $additional_data, $group) == true) {
+                            $data = array(
+                                'Nama' => $this->input->post('nama'),
+                                'Email' => $this->input->post('email'),
+                                'Logo' => $this->upload->file_name,
+                                //'password' => $this->input->post('password'),
+                                'KodePemerintah' => $this->input->post('kode_pemerintah'),
+                                'Tipe' => 'Provinsi',
+                                'UserID' => $this->pemerintahmodel->getLastID()
+                            );
+                            $this->pemerintahmodel->insertPemerintah($data);
+
+                            // notifikasi sudah ada
+                            $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        }
+                        //$this->pemerintahmodel->insert($data);
+                        redirect('administrator/pemerintahprovinsi', 'refresh');
+                        //echo "success";
+                        //break;
+                    } else {
+                        $data['nama'] = array(
+                            'name' => 'nama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Nama Identitas',
+                            'value' => $this->form_validation->set_value('nama')
+                        );
+
+                        $data['email'] = array(
+                            'name' => 'email',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik email',
+                            'value' => $this->form_validation->set_value('email')
+                        );
+                        $data['logo'] = array(
+                            'name' => 'logo',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Logo',
+                            'type' => 'file',
+                            'value' => $this->form_validation->set_value('logo')
+                        );
+                        $data['password'] = array(
+                            'name' => 'password',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Passoword',
+                            'type' => 'password',
+                            'value' => $this->form_validation->set_value('password')
+                        );
+                        $data['kode_pemerintah'] = array(
+                            'option' => $this->comboboxmodel->getProvinsi_dropdown(),
+                            'name' => 'kode_pemerintah',
+                            'diseleksi' => $this->form_validation->set_value('id_kategori')
+                        );
+                        $data['password_confirm'] = array(
+                            'name' => 'password_confirm',
+                            'class' => 'form-control',
+                            'type' => 'password',
+                            'placeholder' => 'Konfirmasi Password',
+                            'value' => $this->form_validation->set_value('password_confirm'),
+                        );
+
+                        $this->smartyci->assign('data', $data);
+                        $this->smartyci->display('administrator/user_pemerintah/insert_pemerintahprovinsi.tpl');
+                        break;
+                    }
+                case 'edit':
+                    $this->form_validation->set_rules('password_lama', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
+
+                    if ($this->form_validation->run() == true) {
+                        $password = $this->input->post('password_lama');
+                        $UserID = $this->input->post('UserID');
+                        $id = $this->input->post('ID');
+
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                            'Email' => $this->input->post('email'),
+                            'Logo' => $this->upload->file_name,
+                            //'password' => $this->input->post('password'),
+                            'KodePemerintah' => $this->input->post('kode_pemerintah'),
+                            'Tipe' => 'Provinsi',
+                            'UserID' => $this->input->post('UserID'),
+                        );
+
+                        $ionauth = array(
+                            'email' => $this->input->post('email'),
+                            'password' => $this->input->post('password'),
+                        );
+
+                        //if ($this->ion_auth->hash_password_db($UserID, $password) != true) {
+                        //$data['message'] = $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+                        //    redirect('administrator/pemerintahkota/edit/' . $id . '');
+                        //}
+                        // update 
+                        $this->pemerintahmodel->updateUserPemerintah($id, $data);
+                        $this->ion_auth_model->update($UserID, $ionauth);
+
+                        redirect('administrator/pemerintahprovinsi', 'refresh');
+                        break;
+                    } else {
+                        if (empty($value)) {
+                            redirect('administrator/pemerintahprovinsi', 'refresh');
+                        }
+                        // ambil data user pemerintah kota sesuai dengan id
+                        $query = $this->pemerintahmodel->getUserPemerintahEdit($value);
+                        $provinsi = $query->row();
+                        // ambil dengan method 
+
+                        $data['nama'] = array(
+                            'name' => 'nama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Nama Identitas',
+                            'value' => ($provinsi->Nama == "" ? $this->form_validation->set_value('nama') : $provinsi->Nama)
+                        );
+
+                        $data['email'] = array(
+                            'name' => 'email',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik email',
+                            'value' => ($provinsi->Email == "" ? $this->form_validation->set_value('email') : $provinsi->Email)
+                        );
+                        $data['logo'] = array(
+                            'name' => 'logo',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Logo',
+                            'type' => 'file',
+                            'value' => ($provinsi->Logo == "" ? $this->form_validation->set_value('logo') : $provinsi->Logo)
+                        );
+                        $data['password_lama'] = array(
+                            'name' => 'password_lama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Password Lama',
+                            'type' => 'text',
+                            'value' => $this->form_validation->set_value('password_lama')
+                        );
+                        $data['password'] = array(
+                            'name' => 'password',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Passoword',
+                            'type' => 'password',
+                            'value' => $this->form_validation->set_value('password')
+                        );
+                        $data['kode_pemerintah'] = array(
+                            'option' => $this->comboboxmodel->getProvinsi_dropdown(),
+                            'name' => 'kode_pemerintah',
+                            'diseleksi' => ($provinsi->KodePemerintah == "" ? $this->form_validation->set_value('kode_pemerintah') : $provinsi->KodePemerintah)
+                        );
+                        $data['password_confirm'] = array(
+                            'name' => 'password_confirm',
+                            'class' => 'form-control',
+                            'type' => 'password',
+                            'placeholder' => 'Konfirmasi Password',
+                            'value' => $this->form_validation->set_value('password_confirm'),
+                        );
+
+                        // ngambil id untuk ke alamat form_open
+                        $data['id'] = $provinsi->ID;
+                        $data['UserID'] = $provinsi->UserID;
+
+                        $this->smartyci->assign('data', $data);
+                        $this->smartyci->display('administrator/user_pemerintah/edit_pemerintahprovinsi.tpl');
+                        break;
+                    }
+                case 'delete':
+                    $UserID = $this->input->get('user');
+                    //echo $UserID;
+                    //echo $value;
+                    $this->ion_auth->delete_user($UserID);
+                    $this->pemerintahmodel->deleteUserPemerintah($value);
+                    redirect('administrator/pemerintahprovinsi', 'refresh');
+                    break;
+                default :
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/user_pemerintah/pemerintah_provinsi.tpl');
+            }
         }
     }
 
-    function data_bendahara() {
+    function pemerintahpusat($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
         if (!$this->ion_auth->logged_in()) {
             //redirect them to the login page
             $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
+            redirect('auth/logout', 'refresh');
         } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
             //redirect them to the home page because they must be an administrator to view this
             $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
+            redirect('auth/logout');
         } else {
             // pemanggilan di header username
             $user = $this->ion_auth->user()->row();
@@ -471,574 +571,674 @@ class Administrator extends CI_Controller {
                 $groups[$user_group->id] = $user_group->name;
             }
 
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
+            // saat edit ambil data sesuai dengan set value
+            $data['PemerintahPusat'] = $this->pemerintahmodel->getUserPemerintah(3);
 
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Bendahara',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 1,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'bendahara',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_bendahara' => $this->tbl_pembimbing->viewall_jenis(5),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_pegawai/data_bendahara.tpl');
-        }
-    }
-
-    function data_operator() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            //$this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
+            $this->form_validation->set_rules('kode_pemerintah', 'Kode Pemerintahan', 'required|xss_clean');
+            $this->form_validation->set_rules('logo', 'Logo', 'callback_image_upload');
+            $this->form_validation->set_rules('email', 'Alamat Email', 'required|valid_email');
+            $this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+            $this->form_validation->set_rules('password_confirm', 'Konfirmasi Password', 'required');
 
             $this->smartyci->assign('user', $user);
             $this->smartyci->assign('groups', $groups);
 
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Operator',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 1,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'operator',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_operator' => $this->tbl_pembimbing->viewall_jenis(6),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
 
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_pegawai/data_operator.tpl');
-        }
-    }
+                        $username = $this->input->post('email');
+                        $password = $this->input->post('password');
 
-    function data_pejabat() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
+                        $group = array('3'); // Sets user to admin. No need for array('1', '2') as user is always set to member by default
 
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
+                        $additional_data = array(
+                            'photo' => $this->input->post('logo'),
+                                //'pemohon_id' => $this->db->insert_id(),
+                        );
 
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Pejabat',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 1,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'pejabat',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_pejabat' => $this->tbl_pembimbing->viewall_jenis(4),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
+                        if ($this->ion_auth->register($username, $password, $username, $additional_data, $group) == true) {
+                            $data = array(
+                                'Nama' => $this->input->post('nama'),
+                                'Email' => $this->input->post('email'),
+                                'Logo' => $this->upload->file_name,
+                                //'password' => $this->input->post('password'),
+                                'KodePemerintah' => $this->input->post('kode_pemerintah'),
+                                'Tipe' => 'Pusat',
+                                'UserID' => $this->pemerintahmodel->getLastID()
+                            );
+                            $this->pemerintahmodel->insertPemerintah($data);
 
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_pegawai/data_pejabat.tpl');
-        }
-    }
+                            // notifikasi sudah ada
+                            $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        }
+                        //$this->pemerintahmodel->insert($data);
+                        redirect('administrator/pemerintahpusat', 'refresh');
+                        //echo "success";
+                        //break;
+                    } else {
+                        $data['nama'] = array(
+                            'name' => 'nama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Nama Identitas',
+                            'value' => $this->form_validation->set_value('nama')
+                        );
 
-    function data_pembimbing() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
+                        $data['email'] = array(
+                            'name' => 'email',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik email',
+                            'value' => $this->form_validation->set_value('email')
+                        );
+                        $data['logo'] = array(
+                            'name' => 'logo',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Logo',
+                            'type' => 'file',
+                            'value' => $this->form_validation->set_value('logo')
+                        );
+                        $data['password'] = array(
+                            'name' => 'password',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Passoword',
+                            'type' => 'password',
+                            'value' => $this->form_validation->set_value('password')
+                        );
+                        $data['kode_pemerintah'] = array(
+                            'option' => $this->comboboxmodel->getPusat_dropdown(),
+                            'name' => 'kode_pemerintah',
+                            'diseleksi' => $this->form_validation->set_value('id_kategori')
+                        );
+                        $data['password_confirm'] = array(
+                            'name' => 'password_confirm',
+                            'class' => 'form-control',
+                            'type' => 'password',
+                            'placeholder' => 'Konfirmasi Password',
+                            'value' => $this->form_validation->set_value('password_confirm'),
+                        );
 
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
+                        $this->smartyci->assign('data', $data);
+                        $this->smartyci->display('administrator/user_pemerintah/insert_pemerintahpusat.tpl');
+                        break;
+                    }
+                case 'edit':
+                    $this->form_validation->set_rules('password_lama', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
 
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Pembimbing',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 1,
-                        'menu_layanan' => 0,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'pembimbing',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_pembimbing' => $this->tbl_pembimbing->viewall_jenis(2),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
+                    if ($this->form_validation->run() == true) {
+                        $password = $this->input->post('password_lama');
+                        $UserID = $this->input->post('UserID');
+                        $id = $this->input->post('ID');
 
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_pegawai/data_pembimbing.tpl');
-        }
-    }
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                            'Email' => $this->input->post('email'),
+                            'Logo' => $this->upload->file_name,
+                            //'password' => $this->input->post('password'),
+                            'KodePemerintah' => $this->input->post('kode_pemerintah'),
+                            'Tipe' => 'Pusat',
+                            'UserID' => $this->input->post('UserID'),
+                        );
 
-    function pemohon() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
+                        $ionauth = array(
+                            'email' => $this->input->post('email'),
+                            'password' => $this->input->post('password'),
+                        );
 
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
+                        //if ($this->ion_auth->hash_password_db($UserID, $password) != true) {
+                        //$data['message'] = $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+                        //    redirect('administrator/pemerintahkota/edit/' . $id . '');
+                        //}
+                        // update 
+                        $this->pemerintahmodel->updateUserPemerintah($id, $data);
+                        $this->ion_auth_model->update($UserID, $ionauth);
 
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Pemohon',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 1,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'pemohon',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_pemohon' => $this->pemohon_m->select_semua_status_verifikasi(),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
+                        redirect('administrator/pemerintahpusat', 'refresh');
+                        break;
+                    } else {
+                        if (empty($value)) {
+                            redirect('administrator/pemerintahpusat', 'refresh');
+                        }
+                        // ambil data user pemerintah kota sesuai dengan id
+                        $query = $this->pemerintahmodel->getUserPemerintahEdit($value);
+                        $pusat = $query->row();
+                        // ambil dengan method 
 
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_layanan/pemohon.tpl');
-        }
-    }
+                        $data['nama'] = array(
+                            'name' => 'nama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Nama Identitas',
+                            'value' => ($pusat->Nama == "" ? $this->form_validation->set_value('nama') : $pusat->Nama)
+                        );
 
-    function kuesioner() {
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
+                        $data['email'] = array(
+                            'name' => 'email',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik email',
+                            'value' => ($pusat->Email == "" ? $this->form_validation->set_value('email') : $pusat->Email)
+                        );
+                        $data['logo'] = array(
+                            'name' => 'logo',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Logo',
+                            'type' => 'file',
+                            'value' => ($pusat->Logo == "" ? $this->form_validation->set_value('logo') : $pusat->Logo)
+                        );
+                        $data['password_lama'] = array(
+                            'name' => 'password_lama',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Password Lama',
+                            'type' => 'text',
+                            'value' => $this->form_validation->set_value('password_lama')
+                        );
+                        $data['password'] = array(
+                            'name' => 'password',
+                            'class' => 'form-control',
+                            'placeholder' => 'Ketik Passoword',
+                            'type' => 'password',
+                            'value' => $this->form_validation->set_value('password')
+                        );
+                        $data['kode_pemerintah'] = array(
+                            'option' => $this->comboboxmodel->getPusat_dropdown(),
+                            'name' => 'kode_pemerintah',
+                            'diseleksi' => ($pusat->KodePemerintah == "" ? $this->form_validation->set_value('kode_pemerintah') : $pusat->KodePemerintah)
+                        );
+                        $data['password_confirm'] = array(
+                            'name' => 'password_confirm',
+                            'class' => 'form-control',
+                            'type' => 'password',
+                            'placeholder' => 'Konfirmasi Password',
+                            'value' => $this->form_validation->set_value('password_confirm'),
+                        );
 
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
+                        // ngambil id untuk ke alamat form_open
+                        $data['id'] = $pusat->ID;
+                        $data['UserID'] = $pusat->UserID;
 
-            $status1 = 1;
-            $status2 = 2;
-            $status3 = 3;
-            $status4 = 4;
-            $status5 = 5;
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Kuesioner',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 1,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'kuesioner',
-                    'username' => 'Ihsan Arif Rahman'),
-                // nomor 1 Ketersediaan informasi Harapan
-                'pilih111' => $this->tbl_kuesioner->ketersediaan_informasi_harapan($status1),
-                'pilih112' => $this->tbl_kuesioner->ketersediaan_informasi_harapan($status2),
-                'pilih113' => $this->tbl_kuesioner->ketersediaan_informasi_harapan($status3),
-                'pilih114' => $this->tbl_kuesioner->ketersediaan_informasi_harapan($status4),
-                'pilih115' => $this->tbl_kuesioner->ketersediaan_informasi_harapan($status5),
-                'pilih121' => $this->tbl_kuesioner->ketersediaan_informasi_kondisi($status1),
-                'pilih122' => $this->tbl_kuesioner->ketersediaan_informasi_kondisi($status2),
-                'pilih123' => $this->tbl_kuesioner->ketersediaan_informasi_kondisi($status3),
-                'pilih124' => $this->tbl_kuesioner->ketersediaan_informasi_kondisi($status4),
-                'pilih125' => $this->tbl_kuesioner->ketersediaan_informasi_kondisi($status5),
-                // nomor 2 kemudahan mendapatkan informasi
-                'pilih211' => $this->tbl_kuesioner->kemudahan_informasi_harapan($status1),
-                'pilih212' => $this->tbl_kuesioner->kemudahan_informasi_harapan($status2),
-                'pilih213' => $this->tbl_kuesioner->kemudahan_informasi_harapan($status3),
-                'pilih214' => $this->tbl_kuesioner->kemudahan_informasi_harapan($status4),
-                'pilih215' => $this->tbl_kuesioner->kemudahan_informasi_harapan($status5),
-                'pilih221' => $this->tbl_kuesioner->kemudahan_informasi_kondisi($status1),
-                'pilih222' => $this->tbl_kuesioner->kemudahan_informasi_kondisi($status2),
-                'pilih223' => $this->tbl_kuesioner->kemudahan_informasi_kondisi($status3),
-                'pilih224' => $this->tbl_kuesioner->kemudahan_informasi_kondisi($status4),
-                'pilih225' => $this->tbl_kuesioner->kemudahan_informasi_kondisi($status5),
-                // nomor 3 kejelasan mendapatkan informasi
-                'pilih311' => $this->tbl_kuesioner->kejelasan_informasi_harapan($status1),
-                'pilih312' => $this->tbl_kuesioner->kejelasan_informasi_harapan($status2),
-                'pilih313' => $this->tbl_kuesioner->kejelasan_informasi_harapan($status3),
-                'pilih314' => $this->tbl_kuesioner->kejelasan_informasi_harapan($status4),
-                'pilih315' => $this->tbl_kuesioner->kejelasan_informasi_harapan($status5),
-                'pilih321' => $this->tbl_kuesioner->kejelasan_informasi_kondisi($status1),
-                'pilih322' => $this->tbl_kuesioner->kejelasan_informasi_kondisi($status2),
-                'pilih323' => $this->tbl_kuesioner->kejelasan_informasi_kondisi($status3),
-                'pilih324' => $this->tbl_kuesioner->kejelasan_informasi_kondisi($status4),
-                'pilih325' => $this->tbl_kuesioner->kejelasan_informasi_kondisi($status5),
-                // nomor 4 kelengkapan informasi
-                'pilih411' => $this->tbl_kuesioner->kelengkapan_informasi_harapan($status1),
-                'pilih412' => $this->tbl_kuesioner->kelengkapan_informasi_harapan($status2),
-                'pilih413' => $this->tbl_kuesioner->kelengkapan_informasi_harapan($status3),
-                'pilih414' => $this->tbl_kuesioner->kelengkapan_informasi_harapan($status4),
-                'pilih415' => $this->tbl_kuesioner->kelengkapan_informasi_harapan($status5),
-                'pilih421' => $this->tbl_kuesioner->kelengkapan_informasi_kondisi($status1),
-                'pilih422' => $this->tbl_kuesioner->kelengkapan_informasi_kondisi($status2),
-                'pilih423' => $this->tbl_kuesioner->kelengkapan_informasi_kondisi($status3),
-                'pilih424' => $this->tbl_kuesioner->kelengkapan_informasi_kondisi($status4),
-                'pilih425' => $this->tbl_kuesioner->kelengkapan_informasi_kondisi($status5),
-                // nomor 5 keragaman informasi
-                'pilih511' => $this->tbl_kuesioner->keragaman_informasi_harapan($status1),
-                'pilih512' => $this->tbl_kuesioner->keragaman_informasi_harapan($status2),
-                'pilih513' => $this->tbl_kuesioner->keragaman_informasi_harapan($status3),
-                'pilih514' => $this->tbl_kuesioner->keragaman_informasi_harapan($status4),
-                'pilih515' => $this->tbl_kuesioner->keragaman_informasi_harapan($status5),
-                'pilih521' => $this->tbl_kuesioner->keragaman_informasi_kondisi($status1),
-                'pilih522' => $this->tbl_kuesioner->keragaman_informasi_kondisi($status2),
-                'pilih523' => $this->tbl_kuesioner->keragaman_informasi_kondisi($status3),
-                'pilih524' => $this->tbl_kuesioner->keragaman_informasi_kondisi($status4),
-                'pilih525' => $this->tbl_kuesioner->keragaman_informasi_kondisi($status5),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_layanan/kuesioner.tpl');
-        }
-    }
-    
-    function internet(){
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Internet',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 1,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'layanan_internet',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_internet' => $this->pemohon_m->cetak_akun_internet(4),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_layanan/layanan_internet.tpl');
-        }
-    }
-    
-    function nametag(){
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Internet',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 1,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'nametag',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_nametag' => $this->pemohon_m->belum_verifikasi(4),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_layanan/name_tag.tpl');
-        }
-    }
-    
-    function nilai(){
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Internet',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 1,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'nilai',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_nilai' => $this->pemohon_m->belum_verifikasi(4),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_layanan/nilai_mahasiswa.tpl');
-        }
-    }
-    
-    function surat(){
-        if (!$this->ion_auth->logged_in()) {
-            //redirect them to the login page
-            $this->session->set_flashdata('message', "Anda Belum Login");
-            redirect('auth/login', 'refresh');
-        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
-            //redirect them to the home page because they must be an administrator to view this
-            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
-            redirect('auth/login');
-        } else {
-            // pemanggilan di header username
-            $user = $this->ion_auth->user()->row();
-            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-            $groups = array();
-            foreach ($user_groups as $user_group) {
-                $groups[$user_group->id] = $user_group->name;
-            }
-
-            $this->smartyci->assign('user', $user);
-            $this->smartyci->assign('groups', $groups);
-
-            $data = array(
-                'meta' => array(
-                    'title' => 'Data Internet',
-                    'menu' => array(
-                        'menu_utama' => 0,
-                        'menu_berita' => 0,
-                        'menu_pesan' => 0,
-                        'menu_pegawai' => 0,
-                        'menu_layanan' => 1,
-                        'menu_layanan2' => 0
-                    ),
-                    'sub_menu' => 'surat',
-                    'username' => 'Ihsan Arif Rahman'),
-                'data_surat' => $this->pemohon_m->belum_verifikasi(4),
-                'no' => 1,
-                'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message')
-            );
-
-            $this->smartyci->assign('data', $data);
-            $this->smartyci->display('administrator/menu_layanan/surat_mahasiswa.tpl');
-        }
-    }
-    
-    function contoh_ajax() {
-        // pemanggilan di header username
-        $user = $this->ion_auth->user()->row();
-        $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
-        $groups = array();
-        foreach ($user_groups as $user_group) {
-            $groups[$user_group->id] = $user_group->name;
-        }
-
-        $this->smartyci->assign('user', $user);
-        $this->smartyci->assign('groups', $groups);
-
-        $data = array(
-            'meta' => array(
-                'title' => 'Data Bendahara',
-                'menu' => array(
-                    'menu_utama' => 0,
-                    'menu_berita' => 0,
-                    'menu_pesan' => 0,
-                    'menu_pegawai' => 1,
-                    'menu_layanan' => 0,
-                    'menu_layanan2' => 0
-                ),
-                'sub_menu' => 'bendahara',
-                'username' => 'Ihsan Arif Rahman'),
-            'no' => 1,
-            'message' => (validation_errors()) ? validation_errors() : $this->session->flashdata('message'),
-            'form' => array(
-                'nama' => array(
-                    'name' => 'nama_pemohon',
-                    'class' => 'form-control',
-                    'placeholder' => 'Masukkan Judul',
-                    'type' => 'text',
-                    'id' => 'nama'
-                ),
-                'npm' => array(
-                    'name' => 'npm',
-                    'class' => 'form-control',
-                    'placeholder' => 'Masukkan npm',
-                    'type' => 'text',
-                    'id' => 'npm'
-                ),
-            ),
-        );
-
-        $this->smartyci->assign('data', $data);
-        $this->smartyci->display('administrator/contoh_ajax.tpl');
-    }
-
-    public function getList() {
-        $db = $this->db->get('pemohon');
-        if ($db->num_rows() == 0) {
-            echo '<tr><td colspan="4">Masih Kosong</td></tr>';
-        } else {
-            foreach ($db->result_object() as $row) {
-                echo '<tr>';
-                echo '<td>' . $row->id . '</td>';
-                echo '<td>' . $row->nama_pemohon . '</td>';
-                echo '<td>' . $row->npm . '</td>';
-                echo '<td width="140">';
-
-                // EDIT BUTTON
-                echo '<a onclick="editUser(' . $row->id . ', ' . $row->nama_pemohon . ', ' . $row->npm . ')" class="btn btn-success btn-sm" href="#">Edit</a>';
-                // DELETE BUTTON
-                echo '<a onclick="setUserDeleteId(' . $row->id . ')" data-toggle="modal" class="btn btn-danger btn-sm" href="#modal_confirm">Hapus</a>';
-                echo '</td>';
-                echo '</tr>';
+                        $this->smartyci->assign('data', $data);
+                        $this->smartyci->display('administrator/user_pemerintah/edit_pemerintahpusat.tpl');
+                        break;
+                    }
+                case 'delete':
+                    $UserID = $this->input->get('user');
+                    //echo $UserID;
+                    //echo $value;
+                    $this->ion_auth->delete_user($UserID);
+                    $this->pemerintahmodel->deleteUserPemerintah($value);
+                    redirect('administrator/pemerintahpusat', 'refresh');
+                    break;
+                default :
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/user_pemerintah/pemerintah_pusat.tpl');
             }
         }
     }
 
-    public function simpan() {
-        $this->form_validation->set_rules('nama_pemohon', 'Nama', 'required|xss_clean|trim');
-        $this->form_validation->set_rules('npm', 'NPM', 'required|xss_clean|trim');
+    function image_upload() {
+        if ($_FILES['logo']['size'] != 0) {
+            $upload_dir = './assets/img/';
+            /* if (!is_dir($upload_dir)) {
+              mkdir($upload_dir);
+              } */
+            $config['upload_path'] = $upload_dir;
+            $config['allowed_types'] = 'gif|jpg|png|jpeg|JPG';
+            $config['file_name'] = $this->upload->file_name;
+            $config['overwrite'] = false;
+            $config['max_size'] = '5120';
 
-        if ($this->form_validation->run()) {
-            if (isset($_POST['id']) && $_POST['id'] != '') {
-                $this->db->where('id', $this->input->post('id'));
-                $this->db->update('pemohon', $this->input->post(NULL, true));
+            $this->upload->initialize($config); // meng set config yang sudah di atur
+            if (!$this->upload->do_upload('logo')) {
+                $this->form_validation->set_message('image_upload', $this->upload->display_errors());
+                return false;
             } else {
-                $this->db->insert('pemohon', $this->input->post(NULL, true));
+                $this->upload_data['file'] = $this->upload->data();
+                return true;
             }
-            echo json_encode(array('status' => 'success', 'msg' => 'Berhasil'));
         } else {
-            echo json_encode(array('status' => 'error', 'msg' => validation_errors()));
+            $this->form_validation->set_message('image_upload', "No file selected");
+            return false;
         }
     }
 
+    function user_masyarakat() {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
+        if (!$this->ion_auth->logged_in()) {
+            //redirect them to the login page
+            $this->session->set_flashdata('message', "Anda Belum Login");
+            redirect('auth/logout', 'refresh');
+        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
+            //redirect them to the home page because they must be an administrator to view this
+            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+            redirect('auth/logout');
+        } else {
+            // pemanggilan di header username
+            $user = $this->ion_auth->user()->row();
+            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
+            $groups = array();
+            foreach ($user_groups as $user_group) {
+                $groups[$user_group->id] = $user_group->name;
+            }
+
+            $data = array(
+                'data_masyarakat' => $this->masyarakatmodel->getUserMasyarakat()
+            );
+
+            $this->smartyci->assign('user', $user);
+            $this->smartyci->assign('groups', $groups);
+            $this->smartyci->assign('data', $data);
+            $this->smartyci->display('administrator/user_masyarakat/masyarakat.tpl');
+        }
+    }
+
+    function tingkatkota($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
+        if (!$this->ion_auth->logged_in()) {
+            //redirect them to the login page
+            $this->session->set_flashdata('message', "Anda Belum Login");
+            redirect('auth/logout', 'refresh');
+        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
+            //redirect them to the home page because they must be an administrator to view this
+            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+            redirect('auth/logout');
+        } else {
+            // pemanggilan di header username
+            $user = $this->ion_auth->user()->row();
+            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
+            $groups = array();
+            foreach ($user_groups as $user_group) {
+                $groups[$user_group->id] = $user_group->name;
+            }
+
+            // saat edit ambil data sesuai dengan set value
+            $data['TingkatKota'] = $this->pemerintahmodel->getTingkatPemerintah(1);
+
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            $this->form_validation->set_rules('provinsi_id', 'Provinsi', 'required|xss_clean');
+
+            $this->smartyci->assign('user', $user);
+            $this->smartyci->assign('groups', $groups);
+
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
+
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                            'ProvinsiID' => $this->input->post('provinsi_id'),
+                        );
+
+                        $this->pemerintahmodel->insertTingkatPemerintah(1, $data);
+
+                        // notifikasi sudah ada
+                        $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        redirect('administrator/tingkatkota', 'refresh');
+                    }
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+                    $data['provinsi_id'] = array(
+                        'option' => $this->comboboxmodel->getProvinsi_dropdown(),
+                        'name' => 'provinsi_id',
+                        'diseleksi' => $this->form_validation->set_value('provinsi_id')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/tingkat_pemerintah/tingkat_kota.tpl');
+                    break;
+                case 'delete':
+                    $id['id'] = $value;
+                    $this->pemerintahmodel->deleteTingkatPemerintah(1, $id);
+
+                    // notifikasi sudah ada
+                    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Telah Di hapus');
+                    redirect('administrator/tingkatkota', 'refresh');
+                    break;
+                default :
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+                    $data['provinsi_id'] = array(
+                        'option' => $this->comboboxmodel->getProvinsi_dropdown(),
+                        'name' => 'provinsi_id',
+                        'diseleksi' => $this->form_validation->set_value('provinsi_id')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/tingkat_pemerintah/tingkat_kota.tpl');
+            }
+        }
+    }
+    
+    function tingkatprovinsi($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
+        if (!$this->ion_auth->logged_in()) {
+            //redirect them to the login page
+            $this->session->set_flashdata('message', "Anda Belum Login");
+            redirect('auth/logout', 'refresh');
+        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
+            //redirect them to the home page because they must be an administrator to view this
+            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+            redirect('auth/logout');
+        } else {
+            // pemanggilan di header username
+            $user = $this->ion_auth->user()->row();
+            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
+            $groups = array();
+            foreach ($user_groups as $user_group) {
+                $groups[$user_group->id] = $user_group->name;
+            }
+
+            // saat edit ambil data sesuai dengan set value
+            $data['TingkatProvinsi'] = $this->pemerintahmodel->getTingkatPemerintah(2);
+
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            //$this->form_validation->set_rules('provinsi_id', 'Provinsi', 'required|xss_clean');
+
+            $this->smartyci->assign('user', $user);
+            $this->smartyci->assign('groups', $groups);
+
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
+
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                        );
+
+                        $this->pemerintahmodel->insertTingkatPemerintah(2, $data);
+
+                        // notifikasi sudah ada
+                        $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        redirect('administrator/tingkatprovinsi', 'refresh');
+                    }
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/tingkat_pemerintah/tingkat_provinsi.tpl');
+                    break;
+                case 'delete':
+                    $id['id'] = $value;
+                    $this->pemerintahmodel->deleteTingkatPemerintah(2, $id);
+
+                    // notifikasi sudah ada
+                    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Telah Di hapus');
+                    redirect('administrator/tingkatprovinsi', 'refresh');
+                    break;
+                default :
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/tingkat_pemerintah/tingkat_provinsi.tpl');
+            }
+        }
+    }
+    function tingkatpusat($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
+        if (!$this->ion_auth->logged_in()) {
+            //redirect them to the login page
+            $this->session->set_flashdata('message', "Anda Belum Login");
+            redirect('auth/logout', 'refresh');
+        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
+            //redirect them to the home page because they must be an administrator to view this
+            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+            redirect('auth/logout');
+        } else {
+            // pemanggilan di header username
+            $user = $this->ion_auth->user()->row();
+            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
+            $groups = array();
+            foreach ($user_groups as $user_group) {
+                $groups[$user_group->id] = $user_group->name;
+            }
+
+            // saat edit ambil data sesuai dengan set value
+            $data['TingkatPusat'] = $this->pemerintahmodel->getTingkatPemerintah(3);
+
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            //$this->form_validation->set_rules('provinsi_id', 'Provinsi', 'required|xss_clean');
+
+            $this->smartyci->assign('user', $user);
+            $this->smartyci->assign('groups', $groups);
+
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
+
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                        );
+
+                        $this->pemerintahmodel->insertTingkatPemerintah(3, $data);
+
+                        // notifikasi sudah ada
+                        $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        redirect('administrator/tingkatpusat', 'refresh');
+                    }
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/tingkat_pemerintah/tingkat_pusat.tpl');
+                    break;
+                case 'delete':
+                    $id['id'] = $value;
+                    $this->pemerintahmodel->deleteTingkatPemerintah(3, $id);
+
+                    // notifikasi sudah ada
+                    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Telah Di hapus');
+                    redirect('administrator/tingkatpusat', 'refresh');
+                    break;
+                default :
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/tingkat_pemerintah/tingkat_pusat.tpl');
+            }
+        }
+    }
+    
+    function datakeluhan($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
+        if (!$this->ion_auth->logged_in()) {
+            //redirect them to the login page
+            $this->session->set_flashdata('message', "Anda Belum Login");
+            redirect('auth/logout', 'refresh');
+        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
+            //redirect them to the home page because they must be an administrator to view this
+            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+            redirect('auth/logout');
+        } else {
+            // pemanggilan di header username
+            $user = $this->ion_auth->user()->row();
+            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
+            $groups = array();
+            foreach ($user_groups as $user_group) {
+                $groups[$user_group->id] = $user_group->name;
+            }
+
+            // saat edit ambil data sesuai dengan set value
+            $data['data_keluhan'] = $this->keluhanmodel->getKeluhanAdmin();
+
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            //$this->form_validation->set_rules('provinsi_id', 'Provinsi', 'required|xss_clean');
+
+            $this->smartyci->assign('user', $user);
+            $this->smartyci->assign('groups', $groups);
+
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
+
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                        );
+
+                        $this->pemerintahmodel->insertTingkatPemerintah(3, $data);
+
+                        // notifikasi sudah ada
+                        $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        redirect('administrator/tingkatpusat', 'refresh');
+                    }
+                case 'delete':
+                    $id['id'] = $value;
+                    $this->pemerintahmodel->deleteTingkatPemerintah(3, $id);
+
+                    // notifikasi sudah ada
+                    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Telah Di hapus');
+                    redirect('administrator/tingkatpusat', 'refresh');
+                    break;
+                default :
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/data_complaint/data_keluhan.tpl');
+            }
+        }
+    }
+    
+    function datakategori($action = NULL, $value = NULL) {
+        if (!$this->ion_auth->logged_in()) {
+            //redirect('/', 'refresh');
+            $status = false;
+            $this->smartyci->assign('status', $status);
+        } else {
+            $status = true;
+            $this->smartyci->assign('status', $status);
+        }
+
+        if (!$this->ion_auth->logged_in()) {
+            //redirect them to the login page
+            $this->session->set_flashdata('message', "Anda Belum Login");
+            redirect('auth/logout', 'refresh');
+        } elseif (!$this->ion_auth->is_admin()) { //remove this elseif if you want to enable this for non-admins
+            //redirect them to the home page because they must be an administrator to view this
+            $this->session->set_flashdata('message', "Anda tidak bisa akses halaman ini");
+            redirect('auth/logout');
+        } else {
+            // pemanggilan di header username
+            $user = $this->ion_auth->user()->row();
+            $user_groups = $this->ion_auth->get_users_groups($user->id)->result();
+            $groups = array();
+            foreach ($user_groups as $user_group) {
+                $groups[$user_group->id] = $user_group->name;
+            }
+
+            // saat edit ambil data sesuai dengan set value
+            $data['data_kategori'] = $this->kategorimodel->getKategori();
+
+            $this->form_validation->set_rules('nama', 'Nama Identitas', 'required|xss_clean');
+            //$this->form_validation->set_rules('provinsi_id', 'Provinsi', 'required|xss_clean');
+
+            $this->smartyci->assign('user', $user);
+            $this->smartyci->assign('groups', $groups);
+
+            switch ($action) {
+                case 'insert':
+                    if ($this->form_validation->run() == TRUE) {
+
+                        $data = array(
+                            'Nama' => $this->input->post('nama'),
+                        );
+
+                        $this->kategorimodel->insertKategori($data);
+
+                        // notifikasi sudah ada
+                        $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Sudah tersimpan');
+                        redirect('administrator/datakategori', 'refresh');
+                    }
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/data_complaint/data_kategori.tpl');
+                    break;
+                case 'delete':
+                    $id['id'] = $value;
+                    $this->kategorimodel->deleteKategori($id);
+
+                    // notifikasi sudah ada
+                    $data['message'] = (validation_errors()) ? validation_errors() : $this->session->set_flashdata('message', 'Data Telah Di hapus');
+                    redirect('administrator/datakategori', 'refresh');
+                    break;
+                default :
+                    $data['nama'] = array(
+                        'name' => 'nama',
+                        'class' => 'form-control',
+                        'placeholder' => 'Ketik Nama Identitas',
+                        'value' => $this->form_validation->set_value('nama')
+                    );
+
+                    $this->smartyci->assign('data', $data);
+                    $this->smartyci->display('administrator/data_complaint/data_kategori.tpl');
+            }
+        }
+    }
 }

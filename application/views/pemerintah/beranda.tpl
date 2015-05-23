@@ -17,9 +17,7 @@
                                 <div class="col-md-12">
                                     <select class="form-control" name="kategori_keluhan">
                                         <option>-- Pilih Kategori --</option>
-                                        {foreach $data.kategori->result() as $row}
-                                            <option value="{$row->ID}">{$row->Nama}</option>
-                                        {/foreach}
+                                            <option value="A">A</option>
                                     </select>
                                 </div>
                             </div>
@@ -36,25 +34,19 @@
                                 <div class="dropdown">
                                     <select class="form-control" name="kota">
                                         <option>-- Pilih Kota/Kabupaten --</option>
-                                        {foreach $data.kota->result() as $row}
-                                            <option value="{$row->ID}">{$row->Nama}</option>
-                                        {/foreach}
+                                            <option value="b">B</option>
                                     </select>
                                 </div>
                                 <div class="dropdown" style="top:10px;">
                                     <select class="form-control" name="provinsi">
                                         <option>-- Pilih Provinsi --</option>
-                                        {foreach $data.provinsi->result() as $row}
-                                            <option value="{$row->ID}">{$row->Nama}</option>
-                                        {/foreach}
+                                            <option value=""></option>
                                     </select>
                                 </div>
                                 <div class="dropdown" style="top:20px;">
                                     <select class="form-control" name="pusat">
                                         <option>-- Pilih Pusat --</option>
-                                        {foreach $data.pusat->result() as $row}
-                                            <option value="{$row->ID}">{$row->Nama}</option>
-                                        {/foreach}
+                                            <option value=""></option>
                                     </select>
                                 </div>
                             </div>

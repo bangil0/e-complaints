@@ -1,122 +1,74 @@
-<!-- BEGIN Navlist -->
-<ul class="nav nav-list">
-    <li class="active">
-        <a href="{base_url()}">
-            <i class="fa fa-home"></i>
-            <span>Beranda</span>
-        </a>
-    </li>
-    <li {if ($data.meta.menu.menu_utama == '1')} class="active" {/if}>
-        <a href="#" class="dropdown-toggle">
-            <i class="fa fa-th-list"></i>
-            <span>Menu Utama</span>
-            <b class="arrow fa fa-angle-right"></b>
-        </a>
-        <!-- BEGIN Submenu -->
-        <ul class="submenu">
-            <li {if ($data.meta.sub_menu == 'halaman')} class="active"{/if}>
-                <a href="{base_url()}administrator/halaman">Halaman</a>
-            </li>
-            <li {if ($data.meta.sub_menu == 'tatacara')} class="active" {/if}>
-                <a href="{base_url()}administrator/tatacara">Tata Cara</a></li>
-            <li {if ($data.meta.sub_menu == 'kontakkami')} class="active" {/if}>
-                <a href="{base_url()}administrator/kontakkami">Kontak Kami</a></li>
-        </ul>
-        <!-- END Submenu -->
-    </li>
-    <li {if ($data.meta.menu.menu_berita == '1')} class="active" {/if}>
-        <a href="#" class="dropdown-toggle">
-            <i class="fa fa-th-list"></i>
-            <span>Informasi Berita</span>
-            <b class="arrow fa fa-angle-right"></b>
-        </a>
-        <!-- BEGIN Submenu -->
-        <ul class="submenu">
-            <li {if ($data.meta.sub_menu == 'berita')} class="active"{/if}>
-                <a href="{base_url()}administrator/berita">Berita</a>
-            </li>
-            <li {if ($data.meta.sub_menu == 'kategori_berita')} class="active" {/if}>
-                <a href="{base_url()}administrator/kategori_berita">Kategori Berita</a></li>
-        </ul>
-        <!-- END Submenu -->
-    </li>
-    <li>
-        <a href="#" class="dropdown-toggle">
-            <i class="fa fa-envelope"></i>
-            <span>Kotak Pesan</span>
-            <b class="arrow fa fa-angle-right"></b>
-        </a>
-        <!-- BEGIN Submenu -->
-        <ul class="submenu">
-            <li><a href="#">Buat Pesan</a></li>
-            <li><a href="#">Pesan Masuk</a></li>
-            <li><a href="#">Pesan Kotak Kami</a></li>
-            <li><a href="#">Pesan Keluar</a></li>
-        </ul>
-        <!-- END Submenu -->
-    </li>
-    <li {if ($data.meta.sub_menu == 'pengujian')} class="active" {/if}>
-        <a href="{base_url()}administrator/pengujian">
-            <i class="fa fa-table fa-fw"></i>
-            <span>Data Pengujian</span>
-        </a>
-    </li>
-    <li>
-        <a href="#">
-            <i class="fa fa-table fa-fw"></i>
-            <span>Data Kompetensi</span>
-        </a>
-    </li>
-    <li {if ($data.meta.menu.menu_pegawai == '1')} class="active" {/if}>
-        <a href="#" class="dropdown-toggle">
-            <i class="fa fa-list"></i>
-            <span>Data Pegawai</span>
-            <b class="arrow fa fa-angle-right"></b>
-        </a>
+<div class="navbar-header">
+    <button type="button" class="btn-block btn-drop navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <strong>MENU</strong>
+    </button>
+</div>
 
-        <!-- BEGIN Submenu -->
-        <ul class="submenu">
-            <li {if ($data.meta.sub_menu == 'administrator')} class="active" {/if}><a href="{base_url()}administrator/data_administrator">Data Administrator</a></li>
-            <li {if ($data.meta.sub_menu == 'bendahara')} class="active" {/if}><a href="{base_url()}administrator/data_bendahara">Data Bendahara</a></li>
-            <li {if ($data.meta.sub_menu == 'operator')} class="active" {/if}><a href="{base_url()}administrator/data_operator">Data Operator</a></li>
-            <li {if ($data.meta.sub_menu == 'pejabat')} class="active" {/if}><a href="{base_url()}administrator/data_pejabat">Data Pejabat</a></li>
-            <li {if ($data.meta.sub_menu == 'pembimbing')} class="active" {/if}><a href="{base_url()}administrator/data_pembimbing">Data Pembimbing</a></li>
-        </ul>
-        <!-- END Submenu -->
-    </li>
-    <li {if ($data.meta.menu.menu_layanan == '1')} class="active" {/if}>
-        <a href="#" class="dropdown-toggle">
-            <i class="fa fa-list"></i>
-            <span>Pelayanan PKL/TA</span>
-            <b class="arrow fa fa-angle-right"></b>
-        </a>
-
-        <!-- BEGIN Submenu -->
-        <ul class="submenu">
-            <li {if ($data.meta.sub_menu == 'pemohon')} class="active" {/if}><a href="{base_url()}administrator/pemohon">Data Pemohon</a></li>
-            <li {if ($data.meta.sub_menu == 'kuesioner')} class="active" {/if}><a href="{base_url()}administrator/kuesioner">Kuesioner Mahasiswa</a></li>
-            <li {if ($data.meta.sub_menu == 'layanan_internet')} class="active" {/if}><a href="{base_url()}administrator/internet">Layanan Internet</a></li>
-            <li {if ($data.meta.sub_menu == 'nametag')} class="active" {/if}><a href="{base_url()}administrator/nametag">Name Tag</a></li>
-            <li {if ($data.meta.sub_menu == 'nilai_mahasiswa')} class="active" {/if}><a href="{base_url()}administrator/nilai">Nilai Mahasiswa</a></li>
-            <li {if ($data.meta.sub_menu == 'surat_jawaban')} class="active" {/if}><a href="{base_url()}administrator/surat">Surat Jawaban</a></li>
-        </ul>
-        <!-- END Submenu -->
-    </li>
-    <li>
-        <a href="#" class="dropdown-toggle">
-            <i class="fa fa-list"></i>
-            <span>Pelayanan Pengujian</span>
-            <b class="arrow fa fa-angle-right"></b>
-        </a>
-
-        <!-- BEGIN Submenu -->
-        <ul class="submenu">
-            <li><a href="#">Data Pemohon</a></li>
-            <li><a href="#">Data Pengujian</a></li>
-            <li><a href="#">Laporan Pengujian</a></li>
-            <li><a href="#">Kuesioner</a></li>
-        </ul>
-        <!-- END Submenu -->
-    </li>
-</ul>
-<!-- END Navlist -->
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+        <li class="active">
+            <a href="{site_url('administrator')}">
+                <div class="text-center">
+                    <i class="fa fa-dashboard fa-3x"></i><br>
+                    Beranda
+                </div>
+            </a>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <div class="text-center">
+                    <i class="fa fa-laptop fa-3x"></i><br>
+                    Akun Pemerintah <span class="caret"></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{site_url('administrator/pemerintahkota')}"><i class="fa fa-lemon-o"></i> Pemerintah Kota</a></li>
+                <li><a href="{site_url('administrator/pemerintahprovinsi')}"><i class="fa fa-puzzle-piece"></i> Pemerintah Provinsi</a></li>
+                <li><a href="{site_url('administrator/pemerintahpusat')}"><i class="fa fa-file"></i> Pemerintah Pusat</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{site_url('administrator/user_masyarakat')}">
+                <div class="text-center">
+                    <i class="fa fa-location-arrow fa-3x"></i><br>
+                    Akun Masyarakat
+                </div>
+            </a>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <div class="text-center">
+                    <i class="fa fa-list fa-3x"></i><br>
+                    Tingkatan Daerah <span class="caret"></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{site_url('administrator/tingkatkota')}"><i class="fa fa-list-alt"></i> Tingkat Kota</a></li>
+                <li><a href="{site_url('administrator/tingkatprovinsi')}"><i class="fa fa-list-ul"></i> Tingkat Provinsi</a></li>
+                <li><a href="{site_url('administrator/tingkatpusat')}"><i class="fa fa-columns"></i> Tingkat Pusat</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <div class="text-center">
+                    <i class="fa fa-folder-open fa-3x"></i><br>
+                    Complaint <span class="caret"></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="{site_url('administrator/datakeluhan')}"><i class="fa fa-table"></i> Data Keluhan</a></li>
+                <li><a href="{site_url('administrator/datatanggapan')}"><i class="fa fa-table"></i> Data Tanggapan</a></li>
+                <li><a href="{site_url('administrator/datakategori')}"><i class="fa fa-table"></i> Data Kategori</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <div class="text-center">
+                    <i class="fa fa-bar-chart-o fa-3x"></i><br>
+                    Report & Graph <span class="caret"></span>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div><!-- /.navbar-collapse -->

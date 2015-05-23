@@ -1,39 +1,51 @@
-<div class="header">
-            <div class="header_top">
-                <div class="menu">
-                    <a class="toggleMenu" href="#"><img src="{base_url()}assets/images/nav.png" alt="" /></a>
-                    <ul class="nav">
-                        <li class="active"><a href="#"><i><img src="{base_url()}assets/images/home.png" alt="" /></i>Home</a></li>
-                        <li><a href="#"><i><img src="{base_url()}assets/images/keluhan2.png" alt="" /></i>Keluhan<span class="messages">5</span></a></li>
-                        <li><a href="#"><i><img src="{base_url()}assets/images/tracking_keluhan.png" alt="" /></i>Tracking Keluhan</a></li>
-                        <li><a href="#"><i><img src="{base_url()}assets/images/statistics.png" alt="" /></i>Grafik Keluhan</a></li>
-                        <div class="clear"></div>
-                    </ul>
-                    <script type="text/javascript" src="{base_url()}assets/js/responsive-nav.js"></script>
-                </div>	
-                <div class="profile_details">
-                    <div id="loginContainer">
-                        <a id="loginButton" class=""><span>Aizul Fadin</span></a>   
-                        <div id="loginBox">                
-                            <form id="loginForm">
-                                <fieldset id="body">
-                                    <div class="user-info">
-                                        <h4>Hello,<a href="#"> Aizul Fadin</a></h4>
-                                        <ul>
-                                            <li class="profile active"><a href="#">Profile </a></li>
-                                            <li class="logout"><a href="{base_url()}auth/logout"> Logout</a></li>
-                                            <div class="clear"></div>		
-                                        </ul>
-                                    </div>			                            
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="profile_img">	
-                        <a href="#"><img src="{base_url()}assets/images/izulIcon.png" alt="" />	</a>
-                    </div>		
-                    <div class="clear"></div>		  	
-                </div>	
-                <div class="clear"></div>				 
-            </div>
-        </div>	  		
+<div class="navbar-header">
+    <button type="button" class="btn-block btn-drop navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <strong>MENU</strong>
+    </button>
+</div>
+
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+        <li class="active">
+            <a href="{site_url('masyarakat')}">
+                <div class="text-center">
+                    <i class="fa fa-dashboard fa-3x"></i><br>
+                    Beranda
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="google-maps.html">
+                <div class="text-center">
+                    <i class="fa fa-location-arrow fa-3x"></i><br>
+                    Keluhan Saya
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="google-maps.html">
+                <div class="text-center">
+                    <i class="fa fa-location-arrow fa-3x"></i><br>
+                    Daftar Keluhan
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="google-maps.html">
+                <div class="text-center">
+                    <i class="fa fa-location-arrow fa-3x"></i><br>
+                    Kebijakan
+                </div>
+            </a>
+        </li>
+        <li>
+            <a href="google-maps.html">
+                <div class="text-center">
+                    <i class="fa fa-location-arrow fa-3x"></i><br>
+                    Panduan
+                </div>
+            </a>
+        </li>
+    </ul>
+</div><!-- /.navbar-collapse -->

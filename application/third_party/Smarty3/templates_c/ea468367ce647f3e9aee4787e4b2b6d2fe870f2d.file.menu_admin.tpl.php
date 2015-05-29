@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 01:29:45
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 23:12:18
          compiled from "application\views\layout\menu_admin.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:12498554c9d59d7fd57-04037900%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ea468367ce647f3e9aee4787e4b2b6d2fe870f2d' => 
     array (
       0 => 'application\\views\\layout\\menu_admin.tpl',
-      1 => 1432319384,
+      1 => 1432397427,
       2 => 'file',
     ),
   ),
@@ -32,7 +32,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <a href="<?php echo site_url('administrator');?>
 ">
                 <div class="text-center">
-                    <i class="fa fa-dashboard fa-3x"></i><br>
+                    <i class="fa fa-home fa-3x"></i><br>
                     Beranda
                 </div>
             </a>
@@ -57,7 +57,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             <a href="<?php echo site_url('administrator/user_masyarakat');?>
 ">
                 <div class="text-center">
-                    <i class="fa fa-location-arrow fa-3x"></i><br>
+                    <i class="fa fa-users fa-3x"></i><br>
                     Akun Masyarakat
                 </div>
             </a>
@@ -81,7 +81,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <div class="text-center">
-                    <i class="fa fa-folder-open fa-3x"></i><br>
+                    <i class="fa fa-comments-o fa-3x"></i><br>
                     Complaint <span class="caret"></span>
                 </div>
             </a>

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-22 21:37:44
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 23:19:13
          compiled from "application\views\layout\header-top.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:13592555a2fa3c32ce7-96071005%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6c9c2f87a9313816e19385c11040b7263cd5503f' => 
     array (
       0 => 'application\\views\\layout\\header-top.tpl',
-      1 => 1432323461,
+      1 => 1432397947,
       2 => 'file',
     ),
   ),
@@ -46,11 +46,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                         </a>
                         <ul class="dropdown-menu">
                             <div class="log-arrow-up"></div>
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profil</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i> Pengaturan</a></li>
-                            <li><a href="#"><i class="fa fa-bell-o"></i> Panduan</a></li>
+                            <li><a href="#"><i class=" fa fa-male"></i>Profil</a></li>
+                            <li><a href="#"><i class="fa fa-wrench"></i> Pengaturan</a></li>
+                            <li><a href="#"><i class="fa fa-book"></i> Panduan</a></li>
                             <li><a href="<?php echo site_url('auth/logout');?>
-"><i class="fa fa-key"></i> Keluar</a></li>
+"><i class="fa fa-sign-out"></i> Keluar</a></li>
                         </ul>
                     </li>
                 </ul>

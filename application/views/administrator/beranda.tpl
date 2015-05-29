@@ -17,7 +17,7 @@
             <div class="col-lg-4 col-sm-4">
                 <section class="panel">
                     <div class="symbol red">
-                        <i class="fa fa-graduation-cap"></i>
+                        <i class="fa fa-frown-o"></i>
                     </div>
                     <div class="value">
                         <h1 class="count">
@@ -30,7 +30,7 @@
             <div class="col-lg-4 col-sm-4">
                 <section class="panel">
                     <div class="symbol yellow">
-                        <i class="fa fa-gift"></i>
+                        <i class="fa fa-spinner"></i>
                     </div>
                     <div class="value">
                         <h1 class="count2">
@@ -43,7 +43,7 @@
             <div class="col-lg-4 col-sm-4">
                 <section class="panel">
                     <div class="symbol terques">
-                        <i class="fa fa-gift"></i>
+                        <i class="fa fa-check-square-o"></i>
                     </div>
                     <div class="value">
                         <h1 class="count3">
@@ -61,7 +61,7 @@
             <div class="col-lg-6 col-sm-6">
                 <section class="panel">
                     <div class="symbol yellow">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="fa fa-users"></i>
                     </div>
                     <div class="value">
                         <h1 class=" count4">
@@ -74,7 +74,7 @@
             <div class="col-lg-6 col-sm-6">
                 <section class="panel">
                     <div class="symbol purple">
-                        <i class="fa fa-money"></i>
+                        <i class="fa fa-user"></i>
                     </div>
                     <div class="value">
                         <h1 class=" count5">

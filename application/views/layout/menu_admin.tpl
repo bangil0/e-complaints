@@ -10,7 +10,7 @@
         <li class="active">
             <a href="{site_url('administrator')}">
                 <div class="text-center">
-                    <i class="fa fa-dashboard fa-3x"></i><br>
+                    <i class="fa fa-home fa-3x"></i><br>
                     Beranda
                 </div>
             </a>
@@ -31,7 +31,7 @@
         <li>
             <a href="{site_url('administrator/user_masyarakat')}">
                 <div class="text-center">
-                    <i class="fa fa-location-arrow fa-3x"></i><br>
+                    <i class="fa fa-users fa-3x"></i><br>
                     Akun Masyarakat
                 </div>
             </a>
@@ -52,7 +52,7 @@
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <div class="text-center">
-                    <i class="fa fa-folder-open fa-3x"></i><br>
+                    <i class="fa fa-comments-o fa-3x"></i><br>
                     Complaint <span class="caret"></span>
                 </div>
             </a>

@@ -32,15 +32,15 @@
                 <div class="col-md-6" style="top: 10px;">
                     <label for="exampleInputFile">Tingkat Pemerintahan</label> 
                     <div class="radio">
-                        <label><input type="radio" name="rdtingkat" value="1">Pemerintah KOTA/KABUPATEN</label>
-                        <label><input type="radio" name="rdtingkat" value="2">Pemerintah PROVINSI</label><br>
-                        <label><input type="radio" name="rdtingkat" value="3">Pemerintah PUSAT</label>
+                        <label><input type="radio" id="kotacheck" name="rdtingkat" value="1">Pemerintah KOTA/KABUPATEN</label>
+                        <label><input type="radio" id="provinsicheck" name="rdtingkat" value="2">Pemerintah PROVINSI</label><br>
+                        <label><input type="radio" id="pusatcheck" name="rdtingkat" value="3">Pemerintah PUSAT</label>
                     </div>
                 </div>
                 <div class="col-md-6" style="top: 10px;">
                     <label>Pilih Kota/Kabupaten, Provinsi, Pusat</label>
                     <div class="dropdown">
-                        <select class="form-control" name="kota">
+                        <select class="form-control" name="kota" id="kotadropdown">
                             <option>-- Pilih Kota/Kabupaten --</option>
                             {foreach $data.kota->result() as $row}
                                 <option value="{$row->ID}">{$row->Nama}</option>
@@ -48,7 +48,7 @@
                         </select>
                     </div>
                     <div class="dropdown" style="top:10px;">
-                        <select class="form-control" name="provinsi">
+                        <select class="form-control" name="provinsi" id="provinsidropdown">
                             <option>-- Pilih Provinsi --</option>
                             {foreach $data.provinsi->result() as $row}
                                 <option value="{$row->ID}">{$row->Nama}</option>
@@ -56,7 +56,7 @@
                         </select>
                     </div>
                     <div class="dropdown" style="top:20px;">
-                        <select class="form-control" name="pusat">
+                        <select class="form-control" name="pusat" id="pusatdropdown">
                             <option>-- Pilih Pusat --</option>
                             {foreach $data.pusat->result() as $row}
                                 <option value="{$row->ID}">{$row->Nama}</option>
@@ -71,7 +71,29 @@
                     </div>
                 </div>
             </form>
-        </div>		
+        </div>
+        <div class="panel panel-body">
+            Select os :<br>
+            Kota
+            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="kotaCheck"/>Provinsi
+            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="provinsiCheck"/>Pusat
+            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="pusatCheck"/>
+            <div id="ifkota" style="display:none">
+                <select name="kota">
+                    <option>Kota</option>
+                </select>
+            </div>
+            <div id="ifprovinsi" style="display:none">
+                <select name="provinsi">
+                    <option>provinsi</option>
+                </select>
+            </div>
+            <div id="ifpusat" style="display:none">
+                <select name="pusat">
+                    <option>pusat</option>
+                </select>
+            </div>
+        </div>
         <div class="border-head">
             <h3><strong> Keluhan </strong> Terkini</h3>
         </div>
@@ -149,5 +171,32 @@
     <script src="{base_url()}assets/js/sparkline-chart.js"></script>
     <script src="{base_url()}assets/js/easy-pie-chart.js"></script>
     <!--<script src="{base_url()}assets/js/count.js"></script>-->
-    <script src="http://code.highcharts.com/highcharts.js"></script>    
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script>
+                $(document).ready(function () {
+                    //default
+                    $("#kotadropdown").prop("disabled", true);
+                    $("#provinsidropdown").prop("disabled", true);
+                    $("#pusatdropdown").prop("disabled", true);
+
+                    // cek kota
+                    $("#kotacheck").click(function () {
+                        $("#kotadropdown").prop("disabled", false);
+                        $("#provinsidropdown").prop("disabled", true);
+                        $("#pusatdropdown").prop("disabled", true);
+                    });
+                    // cek provinsi
+                    $("#provinsicheck").click(function () {
+                        $("#kotadropdown").prop("disabled", true);
+                        $("#provinsidropdown").prop("disabled", false);
+                        $("#pusatdropdown").prop("disabled", true);
+                    });
+                    // cek kota
+                    $("#pusatcheck").click(function () {
+                        $("#kotadropdown").prop("disabled", true);
+                        $("#provinsidropdown").prop("disabled", true);
+                        $("#pusatdropdown").prop("disabled", false);
+                    });
+                });
+    </script>
 {/block}

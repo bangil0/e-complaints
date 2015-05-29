@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 14:05:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 23:05:00
          compiled from "application\views\administrator\beranda.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:30413554c9548d57b48-02904291%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,19 +7,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7c612e71964d87f5ece32aa925130a60e21a09df' => 
     array (
       0 => 'application\\views\\administrator\\beranda.tpl',
-      1 => 1432319685,
+      1 => 1432397095,
       2 => 'file',
     ),
     '4bf1b8ab844cf1976ef2e024066a41bd37c557ee' => 
     array (
       0 => 'application\\views\\layout\\master.tpl',
-      1 => 1432322939,
+      1 => 1432393941,
       2 => 'file',
     ),
     '61f4700e2f81f7b064450ead3e29b3f5bd448142' => 
     array (
       0 => 'application\\views\\administrator\\widget_right.tpl',
-      1 => 1432057109,
+      1 => 1432393941,
       2 => 'file',
     ),
   ),
@@ -109,7 +109,7 @@ assets/css/owl.transitions.css">
             <div class="col-lg-4 col-sm-4">
                 <section class="panel">
                     <div class="symbol red">
-                        <i class="fa fa-graduation-cap"></i>
+                        <i class="fa fa-frown-o"></i>
                     </div>
                     <div class="value">
                         <h1 class="count">
@@ -122,7 +122,7 @@ assets/css/owl.transitions.css">
             <div class="col-lg-4 col-sm-4">
                 <section class="panel">
                     <div class="symbol yellow">
-                        <i class="fa fa-gift"></i>
+                        <i class="fa fa-spinner"></i>
                     </div>
                     <div class="value">
                         <h1 class="count2">
@@ -135,7 +135,7 @@ assets/css/owl.transitions.css">
             <div class="col-lg-4 col-sm-4">
                 <section class="panel">
                     <div class="symbol terques">
-                        <i class="fa fa-gift"></i>
+                        <i class="fa fa-check-square-o"></i>
                     </div>
                     <div class="value">
                         <h1 class="count3">
@@ -153,7 +153,7 @@ assets/css/owl.transitions.css">
             <div class="col-lg-6 col-sm-6">
                 <section class="panel">
                     <div class="symbol yellow">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="fa fa-users"></i>
                     </div>
                     <div class="value">
                         <h1 class=" count4">
@@ -166,7 +166,7 @@ assets/css/owl.transitions.css">
             <div class="col-lg-6 col-sm-6">
                 <section class="panel">
                     <div class="symbol purple">
-                        <i class="fa fa-money"></i>
+                        <i class="fa fa-user"></i>
                     </div>
                     <div class="value">
                         <h1 class=" count5">
@@ -194,7 +194,7 @@ assets/css/owl.transitions.css">
     <?php /*  Call merged included template "administrator/widget_right.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate("administrator/widget_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '30413554c9548d57b48-02904291');
-content_556026bab2e634_98514507($_smarty_tpl);
+content_5560a52c387bf8_69486716($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "administrator/widget_right.tpl" */?>
 
@@ -561,9 +561,9 @@ assets/js/count.js"><?php echo '</script'; ?>
 
 </body>
 </html>	<?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 14:05:30
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 23:05:00
          compiled from "application\views\administrator\widget_right.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_556026bab2e634_98514507')) {function content_556026bab2e634_98514507($_smarty_tpl) {?><div class="col-lg-4">
+<?php if ($_valid && !is_callable('content_5560a52c387bf8_69486716')) {function content_5560a52c387bf8_69486716($_smarty_tpl) {?><div class="col-lg-4">
     <!-- start:user info -->
     <div class="panel panel-default">
         <div class="panel-heading">

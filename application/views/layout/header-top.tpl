@@ -19,10 +19,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <div class="log-arrow-up"></div>
-                            <li><a href="#"><i class=" fa fa-suitcase"></i>Profil</a></li>
-                            <li><a href="#"><i class="fa fa-cog"></i> Pengaturan</a></li>
-                            <li><a href="#"><i class="fa fa-bell-o"></i> Panduan</a></li>
-                            <li><a href="{site_url('auth/logout')}"><i class="fa fa-key"></i> Keluar</a></li>
+                            <li><a href="#"><i class=" fa fa-male"></i>Profil</a></li>
+                            <li><a href="#"><i class="fa fa-wrench"></i> Pengaturan</a></li>
+                            <li><a href="#"><i class="fa fa-book"></i> Panduan</a></li>
+                            <li><a href="{site_url('auth/logout')}"><i class="fa fa-sign-out"></i> Keluar</a></li>
                         </ul>
                     </li>
                 </ul>

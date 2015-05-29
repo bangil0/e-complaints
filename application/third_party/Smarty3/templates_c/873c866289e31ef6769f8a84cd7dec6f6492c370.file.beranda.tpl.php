@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 02:29:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-30 02:10:46
          compiled from "application\views\masyarakat\beranda.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:31515555f7df7b918f8-85156824%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '873c866289e31ef6769f8a84cd7dec6f6492c370' => 
     array (
       0 => 'application\\views\\masyarakat\\beranda.tpl',
-      1 => 1432322344,
+      1 => 1432926637,
       2 => 'file',
     ),
     '4bf1b8ab844cf1976ef2e024066a41bd37c557ee' => 
@@ -132,15 +132,15 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                 <div class="col-md-6" style="top: 10px;">
                     <label for="exampleInputFile">Tingkat Pemerintahan</label> 
                     <div class="radio">
-                        <label><input type="radio" name="rdtingkat" value="1">Pemerintah KOTA/KABUPATEN</label>
-                        <label><input type="radio" name="rdtingkat" value="2">Pemerintah PROVINSI</label><br>
-                        <label><input type="radio" name="rdtingkat" value="3">Pemerintah PUSAT</label>
+                        <label><input type="radio" id="kotacheck" name="rdtingkat" value="1">Pemerintah KOTA/KABUPATEN</label>
+                        <label><input type="radio" id="provinsicheck" name="rdtingkat" value="2">Pemerintah PROVINSI</label><br>
+                        <label><input type="radio" id="pusatcheck" name="rdtingkat" value="3">Pemerintah PUSAT</label>
                     </div>
                 </div>
                 <div class="col-md-6" style="top: 10px;">
                     <label>Pilih Kota/Kabupaten, Provinsi, Pusat</label>
                     <div class="dropdown">
-                        <select class="form-control" name="kota">
+                        <select class="form-control" name="kota" id="kotadropdown">
                             <option>-- Pilih Kota/Kabupaten --</option>
                             <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['data']->value['kota']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -154,7 +154,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                         </select>
                     </div>
                     <div class="dropdown" style="top:10px;">
-                        <select class="form-control" name="provinsi">
+                        <select class="form-control" name="provinsi" id="provinsidropdown">
                             <option>-- Pilih Provinsi --</option>
                             <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['data']->value['provinsi']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -168,7 +168,7 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                         </select>
                     </div>
                     <div class="dropdown" style="top:20px;">
-                        <select class="form-control" name="pusat">
+                        <select class="form-control" name="pusat" id="pusatdropdown">
                             <option>-- Pilih Pusat --</option>
                             <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['data']->value['pusat']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
@@ -189,7 +189,29 @@ $_smarty_tpl->tpl_vars['row']->_loop = true;
                     </div>
                 </div>
             </form>
-        </div>		
+        </div>
+        <div class="panel panel-body">
+            Select os :<br>
+            Kota
+            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="kotaCheck"/>Provinsi
+            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="provinsiCheck"/>Pusat
+            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="pusatCheck"/>
+            <div id="ifkota" style="display:none">
+                <select name="kota">
+                    <option>Kota</option>
+                </select>
+            </div>
+            <div id="ifprovinsi" style="display:none">
+                <select name="provinsi">
+                    <option>provinsi</option>
+                </select>
+            </div>
+            <div id="ifpusat" style="display:none">
+                <select name="pusat">
+                    <option>pusat</option>
+                </select>
+            </div>
+        </div>
         <div class="border-head">
             <h3><strong> Keluhan </strong> Terkini</h3>
         </div>
@@ -275,7 +297,7 @@ $_smarty_tpl->tpl_vars['keluhan']->_loop = true;
     <?php /*  Call merged included template "administrator/widget_right.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate("administrator/widget_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '31515555f7df7b918f8-85156824');
-content_555f83b35d9143_04629969($_smarty_tpl);
+content_5568b9b683f2c8_28257002($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "administrator/widget_right.tpl" */?>
 
@@ -361,13 +383,42 @@ assets/js/count.js"><?php echo '</script'; ?>
 >-->
     <?php echo '<script'; ?>
  src="http://code.highcharts.com/highcharts.js"><?php echo '</script'; ?>
->    
+>
+    <?php echo '<script'; ?>
+>
+                $(document).ready(function () {
+                    //default
+                    $("#kotadropdown").prop("disabled", true);
+                    $("#provinsidropdown").prop("disabled", true);
+                    $("#pusatdropdown").prop("disabled", true);
+
+                    // cek kota
+                    $("#kotacheck").click(function () {
+                        $("#kotadropdown").prop("disabled", false);
+                        $("#provinsidropdown").prop("disabled", true);
+                        $("#pusatdropdown").prop("disabled", true);
+                    });
+                    // cek provinsi
+                    $("#provinsicheck").click(function () {
+                        $("#kotadropdown").prop("disabled", true);
+                        $("#provinsidropdown").prop("disabled", false);
+                        $("#pusatdropdown").prop("disabled", true);
+                    });
+                    // cek kota
+                    $("#pusatcheck").click(function () {
+                        $("#kotadropdown").prop("disabled", true);
+                        $("#provinsidropdown").prop("disabled", true);
+                        $("#pusatdropdown").prop("disabled", false);
+                    });
+                });
+    <?php echo '</script'; ?>
+>
 
 </body>
 </html>	<?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 02:29:55
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-30 02:10:46
          compiled from "application\views\administrator\widget_right.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_555f83b35d9143_04629969')) {function content_555f83b35d9143_04629969($_smarty_tpl) {?><div class="col-lg-4">
+<?php if ($_valid && !is_callable('content_5568b9b683f2c8_28257002')) {function content_5568b9b683f2c8_28257002($_smarty_tpl) {?><div class="col-lg-4">
     <!-- start:user info -->
     <div class="panel panel-default">
         <div class="panel-heading">

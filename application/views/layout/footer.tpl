@@ -2,7 +2,7 @@
     <div class="container">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="footer-widget">
-                <h1 class="page-header">What <strong>E-Com</strong>plaints<strong>.</strong></h1> 
+                <h1 class="page-header">Apa itu <strong>E-Com</strong>plaints<strong>?</strong></h1> 
                 <span class="divider-hr"></span>
                 <div class="row content-widget-footer">
                     <div class="col-sm-4">
@@ -11,14 +11,14 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <p>Nah dadi ngene ceritane, si <strong>Srikan</strong>di<strong>.</strong> kuwi tokoh pewayangan sing ono nang Jowo. Rupane ayu banget lan sakti mandraguna koyo tokoh pewayangan sing liyane yo podo - podo saktine.</p>
+                        <p><strong>E-Com</strong>plaints adalah sistem informasi pengorganisir keluhan-keluhan dari 3 tingkatan pemerintah: Pemerintah Pusat, Provinsi dan Kota/Kabupaten di Indonesia. Keluhan-keluhan tersebut akan ditanggapi oleh pihak yang bersangkutan dan akan menjadi rekap bagi Pemerintah tersebut.</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="footer-widget">
-                <h1 class="page-header">Fitur <strong>E-Com</strong>plaints<strong>.</strong></h1>
+                <h1 class="page-header">Fitur dari <strong>E-Com</strong>plaints<strong>?</strong></h1>
                 <span class="divider-hr"></span>
                 <div class="row content-widget-footer">
                     <div class="col-sm-4">
@@ -27,14 +27,14 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <p>Nah nek fiture <strong>Srikan</strong>di<strong>.</strong> kie akeh banget njuk yo ra cukup nek dijelaske siji-siji wong kekuatane wae wuakih bingit. Nek ra percoyo jal takono dewe karo <strong>Srikan</strong>di<strong>.</strong> ne. lah yo ra dijawab. Salae di omongi kok angel bingit.</p>
+                        <p>Fitur <strong>E-Com</strong>plaints antara lain: Menampung, menanggapi dan menampilkan data keluhan-keluhan dari masyarakat sesuai dengan tingkatan pemerintahan. Data keluhan terssbut dapat langsung dilihat dari masyarakat yang melakukan keluhan serta dapat juga dilihat berupa data keluhan berupa grafik berdasarkan kategori keluhan</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="footer-widget">
-                <h1 class="page-header">Mbayare <strong>Piro</strong>?</h1>
+                <h1 class="page-header">Cara Menggunakan <strong>E-Com</strong>plaints<strong>?</strong></h1>
                 <span class="divider-hr"></span>
                 <div class="row content-widget-footer">
                     <div class="col-sm-4">

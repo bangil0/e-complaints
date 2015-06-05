@@ -31,7 +31,7 @@
         {include file='layout/header-top.tpl'}
 
         <!-- start:header -->
-            {include file='layout/header.tpl'}
+        {include file='layout/header.tpl'}
         <!-- end:header -->
 
         <!-- start:main -->

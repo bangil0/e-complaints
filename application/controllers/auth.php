@@ -13,6 +13,10 @@ class Auth extends CI_Controller {
         $this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
         $this->lang->load('auth');
+
+        //load model
+        $this->load->model('masyarakatmodel');
+        $this->load->model('pemerintahmodel');
     }
 
     //redirect if needed, otherwise display the user list
@@ -40,7 +44,7 @@ class Auth extends CI_Controller {
 
     //log the user in
     function login() {
-        $data['title'] = "Masuk Sistem Informasi Layanan P2F - LIPI ";
+        $data['title'] = "Masuk E-Complaints";
 
         if ($this->ion_auth->logged_in()) {
             redirect('auth/logout', 'refresh');
@@ -52,11 +56,21 @@ class Auth extends CI_Controller {
         if ($this->form_validation->run() == true) {
             $remember = (bool) $this->input->post('remember');
             if ($this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember)) {
+
+                $this->session->set_userdata('username', $this->input->post('username'));
+
                 if ($this->ion_auth->in_group(1)) {
                     redirect('administrator', 'refresh');
                 } else if ($this->ion_auth->in_group(4)) {
                     redirect('masyarakat', 'refresh');
                 } else {
+                    $user = $this->ion_auth->user()->row();
+                    $kode_pemerintah = $this->pemerintahmodel->ambil_tipe($user->id);
+                    
+                    // nyimpen ke session tipe dan kodepemerintahan
+                    $this->session->set_userdata('tipe',$kode_pemerintah['Tipe']);
+                    $this->session->set_userdata('kode_pemerintah',$kode_pemerintah['KodePemerintah']);
+                    
                     redirect('pemerintah', 'refresh');
                 }
             } else {
@@ -375,12 +389,12 @@ class Auth extends CI_Controller {
         }
 
         if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $username, $additional_data, $group)) {
-            // insert ke pemohon
-            //$this->db->insert('pemohon', array(
-            //   'username' => $this->input->post('email'),
-            //    'jenis_kelamin' => $this->input->post('sex'),
-             //   'foto' => $photo));
-
+            $data = array(
+                'UserID' => $this->masyarakatmodel->getLastID(),
+                'JenisKelamin' => $this->input->post('sex'),
+            );
+            $this->masyarakatmodel->insert($data);
+            
             $remember = (bool) $this->input->post('remember');
             $this->ion_auth->login($this->input->post('username'), $this->input->post('password'), $remember);
 
@@ -439,7 +453,7 @@ class Auth extends CI_Controller {
             $username = strtolower($this->input->post('first_name')) . ' ' . strtolower($this->input->post('last_name'));
             $email = strtolower($this->input->post('email'));
             $password = $this->input->post('password');
-            $group_name =array(1);
+            $group_name = array(1);
 
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
@@ -448,7 +462,7 @@ class Auth extends CI_Controller {
                 'phone' => $this->input->post('phone'),
             );
         }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data,$group_name)) {
+        if ($this->form_validation->run() == true && $this->ion_auth->register($username, $password, $email, $additional_data, $group_name)) {
             //check to see if we are creating the user
             //redirect them back to the admin page
             $this->session->set_flashdata('message', $this->ion_auth->messages());

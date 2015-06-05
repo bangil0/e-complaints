@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 02:04:02
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-04 13:49:27
          compiled from "application\views\layout\menu_masyarakat.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:8795554c9db38c2c68-44349292%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ba64b5752595ccbdcc2b9d7bbb345e3085cea663' => 
     array (
       0 => 'application\\views\\layout\\menu_masyarakat.tpl',
-      1 => 1432321440,
+      1 => 1433400347,
       2 => 'file',
     ),
   ),
@@ -38,7 +38,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="<?php echo site_url('masyarakat/keluhan');?>
+">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
                     Keluhan Saya
@@ -46,15 +47,17 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="<?php echo site_url('masyarakat/grafik');?>
+">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
-                    Daftar Keluhan
+                    Grafik Keluhan
                 </div>
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="<?php echo site_url('masyarakat/kebijakan');?>
+">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
                     Kebijakan
@@ -62,7 +65,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="<?php echo site_url('masyarakat/panduan');?>
+">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
                     Panduan

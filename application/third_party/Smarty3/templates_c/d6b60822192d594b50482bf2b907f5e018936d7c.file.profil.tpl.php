@@ -1,19 +1,19 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 04:50:37
-         compiled from "application\views\masyarakat\beranda.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:31515555f7df7b918f8-85156824%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-04 11:51:39
+         compiled from "application\views\masyarakat\profil.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:852055696b1c73de12-22070586%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '873c866289e31ef6769f8a84cd7dec6f6492c370' => 
+    'd6b60822192d594b50482bf2b907f5e018936d7c' => 
     array (
-      0 => 'application\\views\\masyarakat\\beranda.tpl',
-      1 => 1433541035,
+      0 => 'application\\views\\masyarakat\\profil.tpl',
+      1 => 1433393497,
       2 => 'file',
     ),
     '4bf1b8ab844cf1976ef2e024066a41bd37c557ee' => 
     array (
       0 => 'application\\views\\layout\\master.tpl',
-      1 => 1433494243,
+      1 => 1432322939,
       2 => 'file',
     ),
     'b4ff62d5e0775e11a9da345261acea4de87fc380' => 
@@ -23,15 +23,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '31515555f7df7b918f8-85156824',
+  'nocache_hash' => '852055696b1c73de12-22070586',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_555f7df7da6229_40192885',
+  'unifunc' => 'content_55696b1c96fae4_70176818',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_555f7df7da6229_40192885')) {function content_555f7df7da6229_40192885($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_55696b1c96fae4_70176818')) {function content_55696b1c96fae4_70176818($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -82,7 +82,7 @@ assets/css/owl.transitions.css">
 
 
         <!-- start:header -->
-        <?php echo $_smarty_tpl->getSubTemplate ('layout/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+            <?php echo $_smarty_tpl->getSubTemplate ('layout/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
         <!-- end:header -->
 
@@ -93,7 +93,7 @@ assets/css/owl.transitions.css">
             
     <ol class="breadcrumb">
         <li><a href="#">Home</a></li>
-        <li class="active">Beranda</li>
+        <li class="active">Profil</li>
     </ol>
 
             <!-- end:breadcrumb -->   
@@ -103,135 +103,75 @@ assets/css/owl.transitions.css">
     <div class="col-lg-8">
         <!-- start:state overview -->
         <div class="panel panel-body">
-            <h3 align="left"><img src="<?php echo base_url();?>
-assets/images/keluhan2.png" alt=""> Ajukan Keluhan Anda</h3>
-            <br>
-            <form class="form-horizontal" action="<?php echo site_url('masyarakat/insert');?>
-" method="post">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="Judul keluhan" name="judul">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <textarea name="isikeluhan" class="form-control" placeholder="Apa keluhan anda ?"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <select class="form-control" name="kategori_keluhan">
-                            <option>-- Pilih Kategori --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['kategori']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
+            <div class="table-responsive">
+                <h3 align="left">Profil Identitas Diri</h3>
+                <br>
+                <table class="table table-striped">
+                    <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+ $_from = $_smarty_tpl->tpl_vars['data']->value['identitas']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
 $_smarty_tpl->tpl_vars['row']->_loop = true;
 ?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6" style="top: 10px;">
-                    <label for="exampleInputFile">Tingkat Pemerintahan</label> 
-                    <div class="radio">
-                        <label><input type="radio" id="kotacheck" name="rdtingkat" value="1">Pemerintah KOTA/KABUPATEN</label>
-                        <label><input type="radio" id="provinsicheck" name="rdtingkat" value="2">Pemerintah PROVINSI</label><br>
-                        <label><input type="radio" id="pusatcheck" name="rdtingkat" value="3">Pemerintah PUSAT</label>
-                    </div>
-                </div>
-                <div class="col-md-6" style="top: 10px;">
-                    <label>Pilih Kota/Kabupaten, Provinsi, Pusat</label>
-                    <div class="dropdown">
-                        <select class="form-control" name="kota" id="kotadropdown">
-                            <option>-- Pilih Kota/Kabupaten --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['kota']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="dropdown" style="top:10px;">
-                        <select class="form-control" name="provinsi" id="provinsidropdown">
-                            <option>-- Pilih Provinsi --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['provinsi']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="dropdown" style="top:20px;">
-                        <select class="form-control" name="pusat" id="pusatdropdown">
-                            <option>-- Pilih Pusat --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['pusat']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <br>&nbsp;<br><br><br><br>
-                <div class="col-md-12">
-                    <div class="form-group" align="center">
-                        <button type="submit" class="btn btn-primary btn-drop btn-lg">Laporkan Keluhan</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="border-head">
-            <h3><strong> Keluhan </strong> Terkini</h3>
-        </div>
-
-        <?php  $_smarty_tpl->tpl_vars['keluhan'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['keluhan']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['keluhan_terkini']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['keluhan']->key => $_smarty_tpl->tpl_vars['keluhan']->value) {
-$_smarty_tpl->tpl_vars['keluhan']->_loop = true;
-?>
-            <div class="panel panel-primary">
-                <div class="panel-primary panel-drop">
-                    <div class="panel-heading">
-                        <header class="panel-title">
-                            <h3><b><?php echo $_smarty_tpl->tpl_vars['keluhan']->value['Judul'];?>
-</b></h3>
-                        </header>
-                        <div style="color: #39B6AE;font-size:10pt;">
-                            <span class="fa fa-calendar"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['Tanggal'];?>
-&nbsp;&nbsp;&nbsp;<span class="fa fa-android"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['StatusKeluhan'];?>
- &nbsp;&nbsp;&nbsp;<span class="fa fa-building"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['NamaKategori'];?>
-&nbsp;&nbsp;&nbsp;<span class="fa fa-ambulance"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['NamaPemerintah'];?>
-
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['IsiKeluhan'];?>
-
-                    </div>
-                </div>
+                        <tr>
+                            <td rowspan="8" width="200">
+                                <?php if ($_smarty_tpl->tpl_vars['row']->value->photo=='') {?>
+                                    <img src="<?php echo base_url();?>
+assets/img/avatar-mini.jpg" class="img-center img-thumbnail img-responsive">
+                                <?php } else { ?>
+                                    <img src="<?php echo base_url();?>
+assets/img/<?php echo $_smarty_tpl->tpl_vars['row']->value->photo;?>
+" class="img-center img-thumbnail img-responsive">
+                                <?php }?>
+                            </td>
+                            <td><b>Username</b></td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['row']->value->username;?>
+</td>
+                        </tr>
+                        <tr>
+                            <td><b>Nama</b></td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
+</td>
+                        </tr>
+                        <tr>
+                            <td><b>Email</b></td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['row']->value->email;?>
+</td>
+                        </tr>
+                        <tr>
+                            <td><b>Telepon</b></td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['row']->value->Telepon;?>
+</td>
+                        </tr>
+                        <tr>
+                            <td><b>Jenis Kelamin</b></td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['row']->value->JenisKelamin;?>
+</td>
+                        </tr>
+                        <tr>
+                            <td><b>Tanggal Lahir</b></td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['row']->value->TanggalLahir;?>
+</td>
+                        </tr>
+                        <tr>
+                            <td><b>No Identitas</b></td>
+                            <td><?php echo $_smarty_tpl->tpl_vars['row']->value->NoIdentitas;?>
+</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><a href="<?php echo site_url('masyarakat/profil/edit/');?>
+/<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
+" type="button" name="Edit" class="btn btn-warning"><span class="fa fa-user"></span> Edit Identitas Diri</a></td>
+                        </tr>
+                    <?php } ?>
+                </table>
             </div>
-        <?php } ?>
-        <!-- end:state overview -->
+        </div>
     </div>
     <?php /*  Call merged included template "masyarakat/widget_right.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
- $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate("masyarakat/widget_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '31515555f7df7b918f8-85156824');
-content_557219ad255d80_98690269($_smarty_tpl);
+ $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate("masyarakat/widget_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '852055696b1c73de12-22070586');
+content_556fd95bba3ae6_84040134($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "masyarakat/widget_right.tpl" */?>
 
@@ -350,9 +290,9 @@ assets/js/count.js"><?php echo '</script'; ?>
 
 </body>
 </html>	<?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 04:50:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-04 11:51:39
          compiled from "application\views\masyarakat\widget_right.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_557219ad255d80_98690269')) {function content_557219ad255d80_98690269($_smarty_tpl) {?><?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+<?php if ($_valid && !is_callable('content_556fd95bba3ae6_84040134')) {function content_556fd95bba3ae6_84040134($_smarty_tpl) {?><?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['data']->value['identitas']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
 $_smarty_tpl->tpl_vars['row']->_loop = true;

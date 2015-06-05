@@ -2,7 +2,7 @@
     <div class="container">
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
             <div class="footer-widget">
-                <h1 class="page-header">Apa itu <strong>E-Com</strong>plaints<strong>?</strong></h1> 
+                <h1 class="page-header">Apa itu <strong>E-Com</strong>plaints<strong>?</strong></h1>
                 <span class="divider-hr"></span>
                 <div class="row content-widget-footer">
                     <div class="col-sm-4">
@@ -27,7 +27,9 @@
                         </div>
                     </div>
                     <div class="col-sm-8">
-                        <p>Fitur <strong>E-Com</strong>plaints antara lain: Menampung, menanggapi dan menampilkan data keluhan-keluhan dari masyarakat sesuai dengan tingkatan pemerintahan. Data keluhan terssbut dapat langsung dilihat dari masyarakat yang melakukan keluhan serta dapat juga dilihat berupa data keluhan berupa grafik berdasarkan kategori keluhan</p>
+                        <p>Fitur <strong>E-Com</strong>plaints antara lain: Menampung, menanggapi dan memproses data keluhan dari masyarakat sesuai dengan tingkatan pemerintahan
+                            dan ditanggapi oleh pemerintah(pihak) yang bersangkutan. 
+                        </p>
                     </div>
                 </div>
             </div>

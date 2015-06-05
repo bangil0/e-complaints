@@ -1,13 +1,13 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 04:50:37
-         compiled from "application\views\masyarakat\beranda.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:31515555f7df7b918f8-85156824%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 04:51:33
+         compiled from "application\views\masyarakat\keluhan_saya.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:6691556fb8d7b21394-02264921%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
-    '873c866289e31ef6769f8a84cd7dec6f6492c370' => 
+    'd5784d6b9bfb314a26beac4a1c13d2b8255922c9' => 
     array (
-      0 => 'application\\views\\masyarakat\\beranda.tpl',
-      1 => 1433541035,
+      0 => 'application\\views\\masyarakat\\keluhan_saya.tpl',
+      1 => 1433541090,
       2 => 'file',
     ),
     '4bf1b8ab844cf1976ef2e024066a41bd37c557ee' => 
@@ -23,15 +23,15 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '31515555f7df7b918f8-85156824',
+  'nocache_hash' => '6691556fb8d7b21394-02264921',
   'function' => 
   array (
   ),
   'version' => 'Smarty-3.1.21-dev',
-  'unifunc' => 'content_555f7df7da6229_40192885',
+  'unifunc' => 'content_556fb8d7dbb9f2_87403720',
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_555f7df7da6229_40192885')) {function content_555f7df7da6229_40192885($_smarty_tpl) {?><!DOCTYPE html>
+<?php if ($_valid && !is_callable('content_556fb8d7dbb9f2_87403720')) {function content_556fb8d7dbb9f2_87403720($_smarty_tpl) {?><!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
@@ -102,136 +102,68 @@ assets/css/owl.transitions.css">
             
     <div class="col-lg-8">
         <!-- start:state overview -->
-        <div class="panel panel-body">
-            <h3 align="left"><img src="<?php echo base_url();?>
-assets/images/keluhan2.png" alt=""> Ajukan Keluhan Anda</h3>
-            <br>
-            <form class="form-horizontal" action="<?php echo site_url('masyarakat/insert');?>
-" method="post">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" placeholder="Judul keluhan" name="judul">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <textarea name="isikeluhan" class="form-control" placeholder="Apa keluhan anda ?"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <select class="form-control" name="kategori_keluhan">
-                            <option>-- Pilih Kategori --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['kategori']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6" style="top: 10px;">
-                    <label for="exampleInputFile">Tingkat Pemerintahan</label> 
-                    <div class="radio">
-                        <label><input type="radio" id="kotacheck" name="rdtingkat" value="1">Pemerintah KOTA/KABUPATEN</label>
-                        <label><input type="radio" id="provinsicheck" name="rdtingkat" value="2">Pemerintah PROVINSI</label><br>
-                        <label><input type="radio" id="pusatcheck" name="rdtingkat" value="3">Pemerintah PUSAT</label>
-                    </div>
-                </div>
-                <div class="col-md-6" style="top: 10px;">
-                    <label>Pilih Kota/Kabupaten, Provinsi, Pusat</label>
-                    <div class="dropdown">
-                        <select class="form-control" name="kota" id="kotadropdown">
-                            <option>-- Pilih Kota/Kabupaten --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['kota']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="dropdown" style="top:10px;">
-                        <select class="form-control" name="provinsi" id="provinsidropdown">
-                            <option>-- Pilih Provinsi --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['provinsi']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                    <div class="dropdown" style="top:20px;">
-                        <select class="form-control" name="pusat" id="pusatdropdown">
-                            <option>-- Pilih Pusat --</option>
-                            <?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
- $_from = $_smarty_tpl->tpl_vars['data']->value['pusat']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
-foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
-$_smarty_tpl->tpl_vars['row']->_loop = true;
-?>
-                                <option value="<?php echo $_smarty_tpl->tpl_vars['row']->value->ID;?>
-"><?php echo $_smarty_tpl->tpl_vars['row']->value->Nama;?>
-</option>
-                            <?php } ?>
-                        </select>
-                    </div>
-                </div>
-                <br>&nbsp;<br><br><br><br>
-                <div class="col-md-12">
-                    <div class="form-group" align="center">
-                        <button type="submit" class="btn btn-primary btn-drop btn-lg">Laporkan Keluhan</button>
-                    </div>
-                </div>
-            </form>
-        </div>
         <div class="border-head">
-            <h3><strong> Keluhan </strong> Terkini</h3>
+            <h3><strong> Keluhan </strong> Saya</h3>
         </div>
-
-        <?php  $_smarty_tpl->tpl_vars['keluhan'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['keluhan']->_loop = false;
+        <div class="panel panel-body">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="#keluhan" data-toggle="tab">Keluhan</a></li>
+                <li><a href="#grafik" data-toggle="tab">Grafik</a></li>
+            </ul>
+            <hr>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="keluhan">
+                    <?php if (count($_smarty_tpl->tpl_vars['data']->value['keluhan_terkini'])>0) {?>
+                        <?php  $_smarty_tpl->tpl_vars['keluhan'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['keluhan']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['data']->value['keluhan_terkini']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['keluhan']->key => $_smarty_tpl->tpl_vars['keluhan']->value) {
 $_smarty_tpl->tpl_vars['keluhan']->_loop = true;
 ?>
-            <div class="panel panel-primary">
-                <div class="panel-primary panel-drop">
-                    <div class="panel-heading">
-                        <header class="panel-title">
-                            <h3><b><?php echo $_smarty_tpl->tpl_vars['keluhan']->value['Judul'];?>
-</b></h3>
-                        </header>
-                        <div style="color: #39B6AE;font-size:10pt;">
-                            <span class="fa fa-calendar"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['Tanggal'];?>
+                            <div class="panel panel-primary">
+                                <div class="panel-primary panel-drop">
+                                    <div class="panel-heading">
+                                        <header class="panel-title">
+                                            <h2><b><?php echo $_smarty_tpl->tpl_vars['keluhan']->value['Judul'];?>
+</b></h2>
+                                        </header>
+                                        <div style="color: #39B6AE;font-size:10pt;">
+                                            <span class="fa fa-calendar"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['Tanggal'];?>
 &nbsp;&nbsp;&nbsp;<span class="fa fa-android"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['StatusKeluhan'];?>
  &nbsp;&nbsp;&nbsp;<span class="fa fa-building"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['NamaKategori'];?>
 &nbsp;&nbsp;&nbsp;<span class="fa fa-ambulance"></span> <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['NamaPemerintah'];?>
 
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['IsiKeluhan'];?>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <?php echo $_smarty_tpl->tpl_vars['keluhan']->value['IsiKeluhan'];?>
 
-                    </div>
+                                        <hr>
+                                        <?php if ($_smarty_tpl->tpl_vars['keluhan']->value['IsiTanggapan']!='') {?>
+                                            <div class="well well-primary">
+                                                <h3><?php echo $_smarty_tpl->tpl_vars['keluhan']->value['IsiTanggapan'];?>
+</h3>
+                                            </div>                                            
+                                        <?php }?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <i>- belum ada keluhan </i>
+                    <?php }?>
+                </div>
+                <div class="tab-pane" id="grafik">
+                    <div id="container" style="width: 680px;text-align: center"></div>
                 </div>
             </div>
-        <?php } ?>
+        </div>
         <!-- end:state overview -->
     </div>
     <?php /*  Call merged included template "masyarakat/widget_right.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
- $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate("masyarakat/widget_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '31515555f7df7b918f8-85156824');
-content_557219ad255d80_98690269($_smarty_tpl);
+ $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate("masyarakat/widget_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '6691556fb8d7b21394-02264921');
+content_557219e5530905_25488553($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "masyarakat/widget_right.tpl" */?>
 
@@ -293,10 +225,6 @@ assets/js/respond.min.js" ><?php echo '</script'; ?>
 
     <?php echo '<script'; ?>
  src="<?php echo base_url();?>
-assets/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo base_url();?>
 assets/js/owl.carousel.js" ><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
@@ -304,55 +232,166 @@ assets/js/owl.carousel.js" ><?php echo '</script'; ?>
 assets/js/jquery.customSelect.min.js" ><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-assets/js/sparkline-chart.js"><?php echo '</script'; ?>
->
-    <?php echo '<script'; ?>
- src="<?php echo base_url();?>
-assets/js/easy-pie-chart.js"><?php echo '</script'; ?>
->
-    <!--<?php echo '<script'; ?>
- src="<?php echo base_url();?>
-assets/js/count.js"><?php echo '</script'; ?>
->-->
-    <?php echo '<script'; ?>
  src="http://code.highcharts.com/highcharts.js"><?php echo '</script'; ?>
 >
     <?php echo '<script'; ?>
+ src="http://code.highcharts.com/modules/exporting.js"><?php echo '</script'; ?>
 >
-        $(document).ready(function () {
-            //default
-            $("#kotadropdown").prop("disabled", true);
-            $("#provinsidropdown").prop("disabled", true);
-            $("#pusatdropdown").prop("disabled", true);
+    <?php echo '<script'; ?>
+>
+        $(function () {
 
-            // cek kota
-            $("#kotacheck").click(function () {
-                $("#kotadropdown").prop("disabled", false);
-                $("#provinsidropdown").prop("disabled", true);
-                $("#pusatdropdown").prop("disabled", true);
+            $(document).ready(function () {
+
+                // Build the chart
+                $('#container').highcharts({
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false
+                    },
+                    title: {
+                        text: 'Jumlah Keluhan Saya'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false
+                            },
+                            showInLegend: true
+                        }
+                    },
+                    series: [{
+                            type: 'pie',
+                            name: 'Status',
+                            data: [
+                                ['Belum', <?php echo $_smarty_tpl->tpl_vars['data']->value['grafik_keluhan']['belum'];?>
+],
+                                ['Proses', <?php echo $_smarty_tpl->tpl_vars['data']->value['grafik_keluhan']['proses'];?>
+],
+                                ['Selesai', <?php echo $_smarty_tpl->tpl_vars['data']->value['grafik_keluhan']['selesai'];?>
+],
+                            ]
+                        }]
+                });
             });
-            // cek provinsi
-            $("#provinsicheck").click(function () {
-                $("#kotadropdown").prop("disabled", true);
-                $("#provinsidropdown").prop("disabled", false);
-                $("#pusatdropdown").prop("disabled", true);
-            });
-            // cek kota
-            $("#pusatcheck").click(function () {
-                $("#kotadropdown").prop("disabled", true);
-                $("#provinsidropdown").prop("disabled", true);
-                $("#pusatdropdown").prop("disabled", false);
-            });
+
         });
+        /**
+         * Sand-Signika theme for Highcharts JS
+         * @author Torstein Honsi
+         */
+
+// Load the fonts
+        Highcharts.createElement('link', {
+            href: '//fonts.googleapis.com/css?family=Signika:400,700',
+            rel: 'stylesheet',
+            type: 'text/css'
+        }, null, document.getElementsByTagName('head')[0]);
+
+// Add the background image to the container
+        Highcharts.wrap(Highcharts.Chart.prototype, 'getContainer', function (proceed) {
+            proceed.call(this);
+            this.container.style.background = 'url(http://www.highcharts.com/samples/graphics/sand.png)';
+        });
+
+
+        Highcharts.theme = {
+            colors: ["#f45b5b", "#8085e9", "#8d4654", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+                "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+            chart: {
+                backgroundColor: null,
+                style: {
+                    fontFamily: "Signika, serif"
+                }
+            },
+            title: {
+                style: {
+                    color: 'black',
+                    fontSize: '16px',
+                    fontWeight: 'bold'
+                }
+            },
+            subtitle: {
+                style: {
+                    color: 'black'
+                }
+            },
+            tooltip: {
+                borderWidth: 0
+            },
+            legend: {
+                itemStyle: {
+                    fontWeight: 'bold',
+                    fontSize: '13px'
+                }
+            },
+            xAxis: {
+                labels: {
+                    style: {
+                        color: '#6e6e70'
+                    }
+                }
+            },
+            yAxis: {
+                labels: {
+                    style: {
+                        color: '#6e6e70'
+                    }
+                }
+            },
+            plotOptions: {
+                series: {
+                    shadow: true
+                },
+                candlestick: {
+                    lineColor: '#404048'
+                },
+                map: {
+                    shadow: false
+                }
+            },
+            // Highstock specific
+            navigator: {
+                xAxis: {
+                    gridLineColor: '#D0D0D8'
+                }
+            },
+            rangeSelector: {
+                buttonTheme: {
+                    fill: 'white',
+                    stroke: '#C0C0C8',
+                    'stroke-width': 1,
+                    states: {
+                        select: {
+                            fill: '#D0D0D8'
+                        }
+                    }
+                }
+            },
+            scrollbar: {
+                trackBorderColor: '#C0C0C8'
+            },
+            // General
+            background2: '#E0E0E8'
+
+        };
+
+// Apply the theme
+        Highcharts.setOptions(Highcharts.theme);
     <?php echo '</script'; ?>
 >
 
 </body>
 </html>	<?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 04:50:37
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 04:51:33
          compiled from "application\views\masyarakat\widget_right.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_557219ad255d80_98690269')) {function content_557219ad255d80_98690269($_smarty_tpl) {?><?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
+<?php if ($_valid && !is_callable('content_557219e5530905_25488553')) {function content_557219e5530905_25488553($_smarty_tpl) {?><?php  $_smarty_tpl->tpl_vars['row'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['row']->_loop = false;
  $_from = $_smarty_tpl->tpl_vars['data']->value['identitas']->result(); if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array');}
 foreach ($_from as $_smarty_tpl->tpl_vars['row']->key => $_smarty_tpl->tpl_vars['row']->value) {
 $_smarty_tpl->tpl_vars['row']->_loop = true;

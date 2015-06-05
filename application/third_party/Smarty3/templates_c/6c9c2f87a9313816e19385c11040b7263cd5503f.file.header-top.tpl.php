@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 23:19:13
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-30 22:53:12
          compiled from "application\views\layout\header-top.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:13592555a2fa3c32ce7-96071005%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6c9c2f87a9313816e19385c11040b7263cd5503f' => 
     array (
       0 => 'application\\views\\layout\\header-top.tpl',
-      1 => 1432397947,
+      1 => 1433001191,
       2 => 'file',
     ),
   ),
@@ -37,7 +37,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
                 <ul class="nav navbar-nav navbar-right top-menu">
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <img alt="" src="img/avatar1_small.jpg">
+                            
                             <span class="username">
                                 <?php echo $_smarty_tpl->tpl_vars['user']->value->username;?>
 

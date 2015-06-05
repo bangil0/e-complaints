@@ -16,6 +16,11 @@
             <form class="form-horizontal" action="{site_url('masyarakat/insert')}" method="post">
                 <div class="form-group">
                     <div class="col-md-12">
+                        <input type="text" class="form-control" placeholder="Judul keluhan" name="judul">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
                         <textarea name="isikeluhan" class="form-control" placeholder="Apa keluhan anda ?"></textarea>
                     </div>
                 </div>
@@ -72,89 +77,30 @@
                 </div>
             </form>
         </div>
-        <div class="panel panel-body">
-            Select os :<br>
-            Kota
-            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="kotaCheck"/>Provinsi
-            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="provinsiCheck"/>Pusat
-            <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="pusatCheck"/>
-            <div id="ifkota" style="display:none">
-                <select name="kota">
-                    <option>Kota</option>
-                </select>
-            </div>
-            <div id="ifprovinsi" style="display:none">
-                <select name="provinsi">
-                    <option>provinsi</option>
-                </select>
-            </div>
-            <div id="ifpusat" style="display:none">
-                <select name="pusat">
-                    <option>pusat</option>
-                </select>
-            </div>
-        </div>
         <div class="border-head">
             <h3><strong> Keluhan </strong> Terkini</h3>
         </div>
-        <div class="panel panel-body">
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#home" data-toggle="tab">Keluahan</a></li>
-                <li><a href="#tanggapan" data-toggle="tab">Tanggapan</a></li>
-                <li><a href="#peta" data-toggle="tab">Peta</a></li>
 
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    {foreach $data.keluhan_terkini->result() as $keluhan}
-                        <div>
-                            <h2>{$keluhan->UserID}</h2>
-                            {$keluhan->Tanggal}
+        {foreach $data.keluhan_terkini as $keluhan}
+            <div class="panel panel-primary">
+                <div class="panel-primary panel-drop">
+                    <div class="panel-heading">
+                        <header class="panel-title">
+                            <h3><b>{$keluhan['Judul']}</b></h3>
+                        </header>
+                        <div style="color: #39B6AE;font-size:10pt;">
+                            <span class="fa fa-calendar"></span> {$keluhan['Tanggal']}&nbsp;&nbsp;&nbsp;<span class="fa fa-android"></span> {$keluhan['StatusKeluhan']} &nbsp;&nbsp;&nbsp;<span class="fa fa-building"></span> {$keluhan['NamaKategori']}&nbsp;&nbsp;&nbsp;<span class="fa fa-ambulance"></span> {$keluhan['NamaPemerintah']}
                         </div>
-                        <div>
-                            <h4>{$keluhan->IsiKeluhan}</h4>
-                        </div>
-                        <div>
-                            <h6>   
-                                {$keluhan->KodeTingkatan}
-                                {$keluhan->Tipe}
-                                {$keluhan->KategoriID}
-                                {$keluhan->StatusKeluhan}
-                            </h6>
-                        </div>
-                        <br>
-                    {/foreach}
+                    </div>
+                    <div class="panel-body">
+                        {$keluhan['IsiKeluhan']}
+                    </div>
                 </div>
-                <div class="tab-pane" id="tanggapan">
-                    {foreach $data.keluhan_terkini->result() as $keluhan}
-                        <div>
-                            <h2>{$keluhan->UserID}</h2>
-                            {$keluhan->Tanggal}
-                        </div>
-                        <div>
-                            <h4>{$keluhan->IsiKeluhan}</h4>
-                        </div>
-                        <div>
-                            <h6>   
-                                {$keluhan->KodeTingkatan}
-                                {$keluhan->Tipe}
-                                {$keluhan->KategoriID}
-                                {$keluhan->StatusKeluhan}
-                            </h6>
-                        </div>
-                        <br>
-                    {/foreach}
-                </div>
-                <div class="tab-pane" id="messages">...
-                    <input type="text" name="address" required>
-                </div>
-                <div class="tab-pane" id="settings">...</div>
             </div>
-        </div>
+        {/foreach}
         <!-- end:state overview -->
     </div>
-    {include file="administrator/widget_right.tpl"}
+    {include file="masyarakat/widget_right.tpl"}
 {/block}
 
 {block name="addon_styles"}
@@ -173,30 +119,30 @@
     <!--<script src="{base_url()}assets/js/count.js"></script>-->
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script>
-                $(document).ready(function () {
-                    //default
-                    $("#kotadropdown").prop("disabled", true);
-                    $("#provinsidropdown").prop("disabled", true);
-                    $("#pusatdropdown").prop("disabled", true);
+        $(document).ready(function () {
+            //default
+            $("#kotadropdown").prop("disabled", true);
+            $("#provinsidropdown").prop("disabled", true);
+            $("#pusatdropdown").prop("disabled", true);
 
-                    // cek kota
-                    $("#kotacheck").click(function () {
-                        $("#kotadropdown").prop("disabled", false);
-                        $("#provinsidropdown").prop("disabled", true);
-                        $("#pusatdropdown").prop("disabled", true);
-                    });
-                    // cek provinsi
-                    $("#provinsicheck").click(function () {
-                        $("#kotadropdown").prop("disabled", true);
-                        $("#provinsidropdown").prop("disabled", false);
-                        $("#pusatdropdown").prop("disabled", true);
-                    });
-                    // cek kota
-                    $("#pusatcheck").click(function () {
-                        $("#kotadropdown").prop("disabled", true);
-                        $("#provinsidropdown").prop("disabled", true);
-                        $("#pusatdropdown").prop("disabled", false);
-                    });
-                });
+            // cek kota
+            $("#kotacheck").click(function () {
+                $("#kotadropdown").prop("disabled", false);
+                $("#provinsidropdown").prop("disabled", true);
+                $("#pusatdropdown").prop("disabled", true);
+            });
+            // cek provinsi
+            $("#provinsicheck").click(function () {
+                $("#kotadropdown").prop("disabled", true);
+                $("#provinsidropdown").prop("disabled", false);
+                $("#pusatdropdown").prop("disabled", true);
+            });
+            // cek kota
+            $("#pusatcheck").click(function () {
+                $("#kotadropdown").prop("disabled", true);
+                $("#provinsidropdown").prop("disabled", true);
+                $("#pusatdropdown").prop("disabled", false);
+            });
+        });
     </script>
 {/block}

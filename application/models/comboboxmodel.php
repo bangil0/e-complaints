@@ -86,6 +86,6 @@ class comboboxmodel extends CI_Model{
     }
     
     function getPusat(){
-        return $this->db->get('provinsi');
+        return $this->db->get('pusat');
     }
 }

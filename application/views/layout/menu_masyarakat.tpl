@@ -16,7 +16,7 @@
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="{site_url('masyarakat/keluhan')}">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
                     Keluhan Saya
@@ -24,15 +24,15 @@
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="{site_url('masyarakat/grafik')}">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
-                    Daftar Keluhan
+                    Grafik Keluhan
                 </div>
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="{site_url('masyarakat/kebijakan')}">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
                     Kebijakan
@@ -40,7 +40,7 @@
             </a>
         </li>
         <li>
-            <a href="google-maps.html">
+            <a href="{site_url('masyarakat/panduan')}">
                 <div class="text-center">
                     <i class="fa fa-location-arrow fa-3x"></i><br>
                     Panduan

@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 23:05:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 03:14:51
          compiled from "application\views\administrator\beranda.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:30413554c9548d57b48-02904291%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,19 +7,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '7c612e71964d87f5ece32aa925130a60e21a09df' => 
     array (
       0 => 'application\\views\\administrator\\beranda.tpl',
-      1 => 1432397095,
+      1 => 1432926723,
       2 => 'file',
     ),
     '4bf1b8ab844cf1976ef2e024066a41bd37c557ee' => 
     array (
       0 => 'application\\views\\layout\\master.tpl',
-      1 => 1432393941,
+      1 => 1433494243,
       2 => 'file',
     ),
     '61f4700e2f81f7b064450ead3e29b3f5bd448142' => 
     array (
       0 => 'application\\views\\administrator\\widget_right.tpl',
-      1 => 1432393941,
+      1 => 1432057109,
       2 => 'file',
     ),
   ),
@@ -82,7 +82,7 @@ assets/css/owl.transitions.css">
 
 
         <!-- start:header -->
-            <?php echo $_smarty_tpl->getSubTemplate ('layout/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+        <?php echo $_smarty_tpl->getSubTemplate ('layout/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
         <!-- end:header -->
 
@@ -194,7 +194,7 @@ assets/css/owl.transitions.css">
     <?php /*  Call merged included template "administrator/widget_right.tpl" */
 $_tpl_stack[] = $_smarty_tpl;
  $_smarty_tpl = $_smarty_tpl->setupInlineSubTemplate("administrator/widget_right.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0, '30413554c9548d57b48-02904291');
-content_5560a52c387bf8_69486716($_smarty_tpl);
+content_5572033c1fa129_33424530($_smarty_tpl);
 $_smarty_tpl = array_pop($_tpl_stack); 
 /*  End of included template "administrator/widget_right.tpl" */?>
 
@@ -561,9 +561,9 @@ assets/js/count.js"><?php echo '</script'; ?>
 
 </body>
 </html>	<?php }} ?>
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 23:05:00
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 03:14:52
          compiled from "application\views\administrator\widget_right.tpl" */ ?>
-<?php if ($_valid && !is_callable('content_5560a52c387bf8_69486716')) {function content_5560a52c387bf8_69486716($_smarty_tpl) {?><div class="col-lg-4">
+<?php if ($_valid && !is_callable('content_5572033c1fa129_33424530')) {function content_5572033c1fa129_33424530($_smarty_tpl) {?><div class="col-lg-4">
     <!-- start:user info -->
     <div class="panel panel-default">
         <div class="panel-heading">

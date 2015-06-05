@@ -48,7 +48,7 @@
                                 <td>{$masyarakat->id}</td>
                                 <td><b>{$masyarakat->Nama}</b></td>
                                 <td>{$masyarakat->username}</td>
-                                <td>{$masyarakat->Email}</td>
+                                <td>{$masyarakat->email}</td>
                                 <td>
                                     <div class="btn-group">
                                         <a href="{site_url('administrator/pemerintahprovinsi/edit')}/{$masyarakat->ID}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit" data-original-title="" title=""></i></a>

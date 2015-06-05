@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-05-23 14:06:06
+<?php /* Smarty version Smarty-3.1.21-dev, created on 2015-06-06 05:08:54
          compiled from "application\views\administrator\user_masyarakat\masyarakat.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:1443555ed000f1ec80-53843193%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,13 +7,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'ba5b7616812b8d958cd7223a5a2a53f06ebf2dbc' => 
     array (
       0 => 'application\\views\\administrator\\user_masyarakat\\masyarakat.tpl',
-      1 => 1432277981,
+      1 => 1433542131,
       2 => 'file',
     ),
     '4bf1b8ab844cf1976ef2e024066a41bd37c557ee' => 
     array (
       0 => 'application\\views\\layout\\master.tpl',
-      1 => 1432322939,
+      1 => 1433494243,
       2 => 'file',
     ),
   ),
@@ -70,7 +70,7 @@ assets/assets/data-tables/bootstrap3/dataTables.bootstrap.css" rel="stylesheet" 
 
 
         <!-- start:header -->
-            <?php echo $_smarty_tpl->getSubTemplate ('layout/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
+        <?php echo $_smarty_tpl->getSubTemplate ('layout/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, null, array(), 0);?>
 
         <!-- end:header -->
 
@@ -136,7 +136,7 @@ $_smarty_tpl->tpl_vars['masyarakat']->_loop = true;
 </b></td>
                                 <td><?php echo $_smarty_tpl->tpl_vars['masyarakat']->value->username;?>
 </td>
-                                <td><?php echo $_smarty_tpl->tpl_vars['masyarakat']->value->Email;?>
+                                <td><?php echo $_smarty_tpl->tpl_vars['masyarakat']->value->email;?>
 </td>
                                 <td>
                                     <div class="btn-group">

@@ -10,7 +10,7 @@ The Public Complaints Information System is a web-based information system that 
 * [Version Github](https://github.com/ihsanarifr/)
 
 ### License ###
-Copyright (C) 2014 Ihsan Arif Rahman
+Copyright (C) 2015 Ihsan Arif Rahman
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

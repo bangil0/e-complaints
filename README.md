@@ -1,4 +1,4 @@
-# E-COMPLAINTS Indonesian Public Complaints System #
+# E-COMPLAINTS #
 
 The Public Complaints Information System is a web-based information system that serves to accommodate and channel public complaints submitted to the government of Indonesia and the local government, provincial governments and the central government. Complaints submitted by the public will be categorized into several categories, such as the category of Education, Health, and Social Affairs.
 
